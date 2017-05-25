@@ -1,10 +1,7 @@
 package cat.iespaucasesnoves.practica;
 
 import cat.iespaucasesnoves.facturacio.*;
-import cat.iespaucasesnoves.persones.Client;
-import cat.iespaucasesnoves.persones.Empleat;
-import cat.iespaucasesnoves.persones.EmpleatVendes;
-import cat.iespaucasesnoves.persones.Empresa;
+import cat.iespaucasesnoves.persones.*;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
@@ -16,34 +13,55 @@ import java.util.HashMap;
  */
 public class Proves {
 
-    private static HashMap<Integer,Client> clients = new HashMap<>();
-    private static HashMap<Integer,Empleat> empleats = new HashMap<>();
-    /*metodes per crear factures
-    *
-    *
-    */
+    private static HashMap<Integer,EmpleatVendes> empleatsVendes = new HashMap<>();
+    private static HashMap<Integer,EmpleatGeneral> empleatsGenerals = new HashMap<>();
+    private static HashMap<Integer,Empresa> empreses = new HashMap<>();
+    private static HashMap<Integer,Particular> particulars = new HashMap<>();
+    
+    /*metodes per crear factures */
 
-    public static void crearFactura(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc,  TerminiPagament pagament, String codiPais, String numCompte){
+    public static void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc,  TerminiPagament pagament, String codiPais, String numCompte){
     
         /*L'empleat és de VENDES i el client a qui li volem fer la factura és una EMPRESA?*/
-        if (empleats.get(codiEmpleat) instanceof EmpleatVendes && clients.get(codiClient) instanceof Empresa) {
+        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
             /*cream la factura amb IBAN*/
-            FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, codiPais, numCompte);
-            /*ficam la factura dins l'empleat d evendes que l'ha efectuada*/
-        }else{
-            System.out.println("No pots crear la factura");
+            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
+            empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, codiPais, numCompte);            
         }
-    }
-    public static void crearFactura(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat){
+        else if(!empleatsVendes.containsKey(codiEmpleat)){
+            System.out.println("No tens permisos per executar aquesta factura.");
+        }
+        else{
+            System.out.println("Aquest client no disposa d'aquest format de factura.");
+        }
+            
         
-         /*L'empleat és de VENDES i el client a qui li volem fer la factura és una EMPRESA?*/
-        if (empleats.get(codiEmpleat) instanceof EmpleatVendes && clients.get(codiClient) instanceof Empresa) {
-            /*cream factura amb TARGETA*/
-            FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, numTargeta, mesCaducitat, anyCaducitat);
-        }
     }
-    public static void main(String[] args) {
+    public static void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat){
+        
+        /*L'empleat és de VENDES i el client a qui li volem fer la factura és una EMPRESA?*/
+        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
+            /*cream la factura amb IBAN*/
+            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
+            empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, numTargeta, mesCaducitat, anyCaducitat);            
+        }
+        else if(!empleatsVendes.containsKey(codiEmpleat)){
+            System.out.println("No tens permisos per executar aquesta factura.");
+        }
+        else{
+            System.out.println("Aquest client no disposa d'aquest format de factura.");
+        }
+        
+    }
+    public static void modificarFactura(){
+        
+    }
+    
 
+    public static void main(String[] args) {
+        
+
+   
     }
     
 

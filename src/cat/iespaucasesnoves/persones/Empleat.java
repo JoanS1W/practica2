@@ -1,13 +1,12 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.facturacio.TerminiPagament;
-import java.time.LocalDate;
 
 /**
  *
  * @author alumne
  */
 public abstract class Empleat {
+    
     private final int codi;
     private String nomComplet;
     private String identificador;

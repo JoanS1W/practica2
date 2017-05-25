@@ -17,6 +17,9 @@ public abstract class Factura {
     private LocalDate data;
     private boolean pagada;
     
+    private static int numeroFactura = 0;
+    private int codiFactura;
+    
     /**
     * Constructor de factura on hi tenim tots els atributs necessaris, l'atribut 'pagada' al crear una factura es posa com a no pagada.
     * Les llistes fan referencia a les linies que te la factura on cada linia es una jugueta amb la seva quantitat i preu, les 3 llistes es relacionen per mitja de les posicions.
@@ -38,6 +41,9 @@ public abstract class Factura {
         this.descompte = descompte;
         this.data = data;
         this.pagada = false;
+        
+        codiFactura = numeroFactura++;
+        
     }
     
     abstract void afegirProducte();
@@ -66,6 +72,10 @@ public abstract class Factura {
 
     public boolean isPagada() {
         return pagada;
+    }
+    
+        public int getCodiFactura() {
+        return codiFactura;
     }
     
     /*setters amb condicio de que la factura no estigui pagada que amollara excepcio*/
@@ -98,6 +108,13 @@ public abstract class Factura {
         }else {
         this.pagada = pagat;
         }
+    }
+    
+    public void afegirLiniaFactura(int producte, int quantitat, double preuUnitari){
+        
+        productes.add(producte);
+        quantitats.add(quantitat);
+        preuUnitaris.add(preuUnitari);
     }
     
     
