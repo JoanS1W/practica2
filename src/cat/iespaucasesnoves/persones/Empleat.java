@@ -1,5 +1,8 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.facturacio.TerminiPagament;
+import java.time.LocalDate;
+
 /**
  *
  * @author alumne
@@ -25,9 +28,10 @@ public abstract class Empleat {
         this.salariBase = salariBase;
     }
     
+    /*metodes abstractes que hauran d'implementar les clases heretades*/
     abstract double calcularNomina();
     
-    /*getters*/
+    /*getters de tots atributs menys del codi que es final*/
 
     public int getCodi() {
         return codi;
@@ -90,6 +94,7 @@ public abstract class Empleat {
     public void setSalariBase(double salariBase) {
         this.salariBase = salariBase;
     }
+    
     
     
 }

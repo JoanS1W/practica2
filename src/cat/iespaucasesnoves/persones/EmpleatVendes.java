@@ -1,6 +1,8 @@
 package cat.iespaucasesnoves.persones;
 
 import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
+import cat.iespaucasesnoves.facturacio.TerminiPagament;
+import java.time.LocalDate;
 import java.util.HashSet;
 
 /**
@@ -24,8 +26,13 @@ public class EmpleatVendes extends Empleat{
         return getSalariBase() + comissio;
     }
     
-    /*TODO metode crear factura i guardar-la al hashset*/
+    /*metodes per crear factura a empresa amb TARGETA o IBAN*/
+    public void crearFactura(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc,  TerminiPagament pagament, String codiPais, String numCompte){
     
+    }
+    public void crearFactura(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, LocalDate mesCaducitat, LocalDate anyCaducitat){
+        
+    }
     /*getters*/
 
     public double getComissio() {
