@@ -4,6 +4,6 @@ package cat.iespaucasesnoves.facturacio;
  *
  * @author alumne
  */
-public enum TerminiPagat {
+public enum TerminiPagament {
     DIARI, SEMANAL, MENSUAL
 }
