@@ -7,6 +7,7 @@ package cat.iespaucasesnoves.persones;
  */
 public abstract class Empleat {
     
+    private static int numeroEmpleat = 0;
     private final int codi;
     private String nomComplet;
     private String identificador;
@@ -16,8 +17,8 @@ public abstract class Empleat {
     private CategoriaEmpleat categoria;
     private double salariBase;
 
-    public Empleat(int codi, String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase) {
-        this.codi = codi;
+    public Empleat(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase) {
+        codi = numeroEmpleat++;
         this.nomComplet = nomComplet;
         this.identificador = identificador;
         this.email = email;

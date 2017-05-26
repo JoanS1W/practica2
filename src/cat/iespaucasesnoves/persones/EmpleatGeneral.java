@@ -9,8 +9,8 @@ public class EmpleatGeneral extends Empleat{
     private double horesExtres;
     private double preuHora;
 
-    public EmpleatGeneral(int codi, String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora ) {
-        super(codi, nomComplet, identificador, email, telefon, direccio, categoria, salariBase);
+    public EmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora ) {
+        super(nomComplet, identificador, email, telefon, direccio, categoria, salariBase);
         this.horesExtres = horesExtres;
         this.preuHora = preuHora;
     }

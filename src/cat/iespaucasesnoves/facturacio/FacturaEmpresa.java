@@ -47,9 +47,5 @@ public class FacturaEmpresa extends Factura{
         this.metodeDePagament = "TARGETA";
 
     }   
-    
-    @Override
-    public void afegirProducte() {
 
-    }
 }

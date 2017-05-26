@@ -9,12 +9,5 @@ public class FacturaParticular extends Factura{
 
     public FacturaParticular(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data) {
         super(producte, quantitat, preuUnitari, descompte, data);
-    }
-
-    @Override
-    public void afegirProducte() {
-
-    }
-
-    
+    }   
 }

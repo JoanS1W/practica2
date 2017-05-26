@@ -18,7 +18,7 @@ public abstract class Factura {
     private boolean pagada;
     
     private static int numeroFactura = 0;
-    private int codiFactura;
+    private final int codiFactura;
     
     /**
     * Constructor de factura on hi tenim tots els atributs necessaris, l'atribut 'pagada' al crear una factura es posa com a no pagada.
@@ -46,7 +46,6 @@ public abstract class Factura {
         
     }
     
-    abstract void afegirProducte();
     
     /*getters de tots els atributs*/
 
@@ -81,12 +80,12 @@ public abstract class Factura {
     /*setters amb condicio de que la factura no estigui pagada que amollara excepcio*/
 
     /*Aquest setter ens deixara modificar una linia sencera de la factura.*/
-    public void setProducte(int numeroLinia, int codiJugueta, int quantitat, double preuUnitari) throws ExcepcioPagada{
+    public void setLiniaFactura(int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada{
         
         if(pagada){
             throw new ExcepcioPagada("Factura PAGADA no modificable");
         }else{
-            productes.add(numeroLinia, codiJugueta);
+            productes.add(numeroLinia, producte);
             quantitats.add(numeroLinia, quantitat);
             preuUnitaris.add(numeroLinia,preuUnitari);  
         }
@@ -110,11 +109,15 @@ public abstract class Factura {
         }
     }
     
-    public void afegirLiniaFactura(int producte, int quantitat, double preuUnitari){
+    public void afegirLiniaFactura(int producte, int quantitat, double preuUnitari)throws ExcepcioPagada{
         
-        productes.add(producte);
-        quantitats.add(quantitat);
-        preuUnitaris.add(preuUnitari);
+        if (pagada) {
+          throw new ExcepcioPagada("Factura PAGADA no modificable");  
+        }else {
+            productes.add(producte);
+            quantitats.add(quantitat);
+            preuUnitaris.add(preuUnitari);
+        }
     }
     
     
