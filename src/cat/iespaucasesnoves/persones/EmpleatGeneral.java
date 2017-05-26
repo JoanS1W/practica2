@@ -4,12 +4,12 @@ package cat.iespaucasesnoves.persones;
  *
  * @author alumne
  */
-public class EmpleatGeneral extends Empleat{
-    
+public class EmpleatGeneral extends Empleat {
+
     private double horesExtres;
     private double preuHora;
 
-    public EmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora ) {
+    public EmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora) {
         super(nomComplet, identificador, email, telefon, direccio, categoria, salariBase);
         this.horesExtres = horesExtres;
         this.preuHora = preuHora;
@@ -17,11 +17,10 @@ public class EmpleatGeneral extends Empleat{
 
     @Override
     double calcularNomina() {
-        return getSalariBase() + (horesExtres*preuHora);
+        return getSalariBase() + (horesExtres * preuHora);
     }
-    
-    /*getters*/
 
+    /*getters*/
     public double getHoresExtres() {
         return horesExtres;
     }
@@ -29,5 +28,5 @@ public class EmpleatGeneral extends Empleat{
     public double getPreuHora() {
         return preuHora;
     }
-    
+
 }

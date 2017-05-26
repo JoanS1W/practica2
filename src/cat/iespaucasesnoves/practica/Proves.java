@@ -13,14 +13,14 @@ import java.util.HashMap;
  */
 public class Proves {
 
-    private static HashMap<Integer,EmpleatVendes> empleatsVendes = new HashMap<>();
-    private static HashMap<Integer,EmpleatGeneral> empleatsGenerals = new HashMap<>();
-    private static HashMap<Integer,Empresa> empreses = new HashMap<>();
-    private static HashMap<Integer,Particular> particulars = new HashMap<>();
+    private HashMap<Integer,EmpleatVendes> empleatsVendes = new HashMap<>();
+    private HashMap<Integer,EmpleatGeneral> empleatsGenerals = new HashMap<>();
+    private HashMap<Integer,Empresa> empreses = new HashMap<>();
+    private HashMap<Integer,Particular> particulars = new HashMap<>();
     
     /*metode on cream dades y guardam dins JSON*/
     
-    public static void crearDades(){
+    public void crearDades(){
         //4 empleats vendes
         EmpleatVendes ev1 = new EmpleatVendes("Miguel", "dni", "@gmail.com", "123 456 789", "carrer", CategoriaEmpleat.TECNIC, 2000, 20);
         EmpleatVendes ev2 = new EmpleatVendes("Joan", "nif", "@gmail.com", "123 456 789", "gran via", CategoriaEmpleat.AUXILIAR, 1500, 10);
@@ -42,7 +42,7 @@ public class Proves {
     
     /*metodes per crear factures */
 
-    public static void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte){
+    public void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte){
     
         /*L'empleat és de VENDES i el client a qui li volem fer la factura és una EMPRESA?*/
         if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
@@ -60,7 +60,7 @@ public class Proves {
             
         
     }
-    public static void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat){
+    public void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat){
         
         /*L'empleat és de VENDES i el client a qui li volem fer la factura és una EMPRESA?*/
         if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
@@ -77,13 +77,13 @@ public class Proves {
         }
         
     }
-    public static void modificarFactura(){
+    public void modificarFactura(){
         
     }
     
 
     public static void main(String[] args) {
-        
+        Proves app = new Proves();
 
    
     }
