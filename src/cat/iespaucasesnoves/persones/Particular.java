@@ -18,6 +18,9 @@ public class Particular extends Client {
             FacturaParticular tab = entry.getValue();
             totalFactures = totalFactures + tab.getTotal();
         }
+        for (FacturaParticular factura : factures.values()) {
+            totalFactures = totalFactures + factura.getTotal();
+        }
         return totalFactures;
     }
 }

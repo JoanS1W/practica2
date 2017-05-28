@@ -21,7 +21,8 @@ public abstract class Factura {
     private boolean pagada;
     private double total;
 
-    private static int numeroFactura = 0;//Al fer eliminarFactura fer un -1
+    private static int numeroFactura = 0;//Al fer eliminarFactura fer un -1 : fa la funcio de autoincrementable per tal que cada vegada que ficam factura es posi un codi nou unic, sino hauriem de comprovar cada vegada que es codi que ficam encara no existeix.
+    //NO HEM DE FER -1 ja que si per exemple borram factura numero 300 i nem fetes 400, numeroFactura = 400 , si restam sa proxima factura que es faci tendra codi duplicat amb numero 400.
     private final int codiFactura;
 
     /**

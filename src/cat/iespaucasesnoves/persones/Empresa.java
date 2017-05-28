@@ -18,6 +18,11 @@ public class Empresa extends Client {
             FacturaEmpresa tab = entry.getValue();
             totalFactures = totalFactures + tab.getTotal();
         }
+        //foreach: factures.values() ens torna els valors del mapa.
+        for (FacturaEmpresa factura : factures.values()) {
+		totalFactures = totalFactures + factura.getTotal();
+	}
+		
         return totalFactures;
     }
 }

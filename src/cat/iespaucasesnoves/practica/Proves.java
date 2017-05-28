@@ -2,10 +2,12 @@ package cat.iespaucasesnoves.practica;
 
 import cat.iespaucasesnoves.facturacio.*;
 import cat.iespaucasesnoves.persones.*;
+import com.google.gson.JsonObject;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.HashMap;
+import json.ElementsJSON;
 
 /**
  *
@@ -81,10 +83,25 @@ public class Proves {
         
     }
     
+    public void crearNominaJson(){
+}
+    
 
     public static void main(String[] args) {
         Proves app = new Proves();
 
+        //proves json
+         ElementsJSON element1 = new ElementsJSON("toni", "454554", 3435);
+         ElementsJSON element2 = new ElementsJSON("toni", "435", 6768);
+         
+         JsonObject object = new JsonObject();         
+         object.addProperty("nom", element1.getNom());
+         object.addProperty("id", element1.getIdentificador());
+         object.addProperty("total", element1.getTotalNomina());
+         
+         String json  = object.toString();
+         
+         System.out.println(json);
    
     }
     
