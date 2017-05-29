@@ -8,7 +8,7 @@ import java.time.Year;
  *
  * @author alumne
  */
-public class FacturaEmpresa extends Factura{
+public class FacturaEmpresa extends Factura {
 
     private TerminiPagament pagament;
     private String banc;
@@ -25,19 +25,20 @@ public class FacturaEmpresa extends Factura{
     private int codiClient;
 
     /**
-     * Tendrem dos constructors per la factura d'empresa, un per les que tenen IBAN i l'altra per TARGETES.
+     * Tendrem dos constructors per la factura d'empresa, un per les que tenen
+     * IBAN i l'altra per TARGETES.
      */
-    public FacturaEmpresa( int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc,  TerminiPagament pagament, String codiPais, String numCompte) {
+    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
         super(producte, quantitat, preuUnitari, descompte, data);
         this.pagament = pagament;
         this.codiPais = codiPais;
         this.numCompte = numCompte;
         this.banc = banc;
-        this.metodeDePagament = "IBAN";      
-        
+        this.metodeDePagament = "IBAN";
+
     }
 
-    public FacturaEmpresa( int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat) {
+    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat) {
         super(producte, quantitat, preuUnitari, descompte, data);
         this.pagament = pagament;
         this.numTargeta = numTargeta;
@@ -46,6 +47,6 @@ public class FacturaEmpresa extends Factura{
         this.banc = banc;
         this.metodeDePagament = "TARGETA";
 
-    }   
+    }
 
 }

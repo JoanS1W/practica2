@@ -9,9 +9,9 @@ package cat.iespaucasesnoves.excepcions;
  *
  * @author PCcasa
  */
-public class AccioNoRealitzable extends Exception{
-    
-    public AccioNoRealitzable(String missatge){
+public class AccioNoRealitzable extends Exception {
+
+    public AccioNoRealitzable(String missatge) {
         super(missatge);
     }
 }

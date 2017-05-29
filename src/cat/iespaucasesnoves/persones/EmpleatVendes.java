@@ -30,6 +30,7 @@ public class EmpleatVendes extends Empleat {
     public double getComissio() {
         return comissio;
     }
+
     //Cream una copia per a no passar la referencia del nostre mapa
     public ArrayList<FacturaEmpresa> getVendes() {
         ArrayList<FacturaEmpresa> facturesEmpleat = new ArrayList<>();

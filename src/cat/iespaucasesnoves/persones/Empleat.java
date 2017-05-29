@@ -1,12 +1,11 @@
 package cat.iespaucasesnoves.persones;
 
-
 /**
  *
  * @author alumne
  */
 public abstract class Empleat {
-    
+
     private static int numeroEmpleat = 0;
     private final int codi;
     private String nomComplet;
@@ -27,12 +26,11 @@ public abstract class Empleat {
         this.categoria = categoria;
         this.salariBase = salariBase;
     }
-    
+
     /*metodes abstractes que hauran d'implementar les clases heretades*/
     abstract double calcularNomina();
-    
-    /*getters de tots atributs menys del codi que es final*/
 
+    /*getters de tots atributs menys del codi que es final*/
     public int getCodi() {
         return codi;
     }
@@ -64,9 +62,8 @@ public abstract class Empleat {
     public double getSalariBase() {
         return salariBase;
     }
-    
-    /*setters*/
 
+    /*setters*/
     public void setNomComplet(String nomComplet) {
         this.nomComplet = nomComplet;
     }
@@ -94,7 +91,5 @@ public abstract class Empleat {
     public void setSalariBase(double salariBase) {
         this.salariBase = salariBase;
     }
-    
-    
-    
+
 }

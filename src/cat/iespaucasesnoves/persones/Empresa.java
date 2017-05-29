@@ -20,9 +20,9 @@ public class Empresa extends Client {
         }
         //foreach: factures.values() ens torna els valors del mapa.
         for (FacturaEmpresa factura : factures.values()) {
-		totalFactures = totalFactures + factura.getTotal();
-	}
-		
+            totalFactures = totalFactures + factura.getTotal();
+        }
+
         return totalFactures;
     }
 }
