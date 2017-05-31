@@ -1,5 +1,8 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import cat.iespaucasesnoves.facturacio.FacturaParticular;
+
 /**
  *
  * @author alumne
@@ -27,6 +30,20 @@ public class EmpleatGeneral extends Empleat {
 
     public double getPreuHora() {
         return preuHora;
+    }
+    
+        /*metodes per crear i gestionar factura per l'empleat general*/
+    public FacturaParticular facturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagat) {
+
+        FacturaParticular novaFactura = new FacturaParticular(producte, quantitat, preuUnitari, descompte, importPagat);
+        /*retornam factura per tal d'associar-la al client*/
+        return novaFactura;
+
+    }
+
+    public void afegirLiniaFactura(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
+
+        //TODO afegir linia?
     }
 
 }

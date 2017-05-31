@@ -2,6 +2,7 @@ package cat.iespaucasesnoves.facturacio;
 
 import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
 import java.time.LocalDate;
+import static java.time.LocalDate.now;
 import java.util.ArrayList;
 
 /**
@@ -21,8 +22,7 @@ public abstract class Factura {
     private boolean pagada;
     private double total;
 
-    private static int numeroFactura = 0;//Al fer eliminarFactura fer un -1 : fa la funcio de autoincrementable per tal que cada vegada que ficam factura es posi un codi nou unic, sino hauriem de comprovar cada vegada que es codi que ficam encara no existeix.
-    //NO HEM DE FER -1 ja que si per exemple borram factura numero 300 i nem fetes 400, numeroFactura = 400 , si restam sa proxima factura que es faci tendra codi duplicat amb numero 400.
+    private static int numeroFactura = 0;
     private final int codiFactura;
 
     /**
@@ -40,7 +40,7 @@ public abstract class Factura {
      * @param data de creacio de la factura.
      * @param descompte de la jugueta
      */
-    public Factura(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data) {
+    public Factura(int producte, int quantitat, double preuUnitari, int descompte) {
         productes = new ArrayList<>();
         quantitats = new ArrayList<>();
         preuUnitaris = new ArrayList<>();
@@ -49,7 +49,7 @@ public abstract class Factura {
         quantitats.add(quantitat);
         preuUnitaris.add(preuUnitari);
         this.descompte = descompte;
-        this.data = data;
+        this.data = now();
         this.pagada = false;
 
         codiFactura = numeroFactura++;

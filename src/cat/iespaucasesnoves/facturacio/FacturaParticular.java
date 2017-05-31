@@ -4,9 +4,10 @@ import java.time.LocalDate;
 
 public class FacturaParticular extends Factura {
 
-    private int importPagat;
+    private double importPagat;
 
-    public FacturaParticular(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data) {
-        super(producte, quantitat, preuUnitari, descompte, data);
+    public FacturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagat) {
+        super(producte, quantitat, preuUnitari, descompte);
+        this.importPagat = importPagat;
     }
 }

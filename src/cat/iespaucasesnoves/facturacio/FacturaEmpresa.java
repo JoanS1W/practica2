@@ -29,7 +29,7 @@ public class FacturaEmpresa extends Factura {
      * IBAN i l'altra per TARGETES.
      */
     public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
-        super(producte, quantitat, preuUnitari, descompte, data);
+        super(producte, quantitat, preuUnitari, descompte);
         this.pagament = pagament;
         this.codiPais = codiPais;
         this.numCompte = numCompte;
@@ -39,7 +39,7 @@ public class FacturaEmpresa extends Factura {
     }
 
     public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat) {
-        super(producte, quantitat, preuUnitari, descompte, data);
+        super(producte, quantitat, preuUnitari, descompte);
         this.pagament = pagament;
         this.numTargeta = numTargeta;
         this.mesCaducitat = mesCaducitat;

@@ -1,6 +1,8 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
 import cat.iespaucasesnoves.facturacio.FacturaParticular;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -14,13 +16,21 @@ public class Particular extends Client {
     @Override
     public double calcularFactura() {
         double totalFactures = 0;
-        for (HashMap.Entry<Integer, FacturaParticular> entry : factures.entrySet()) {
-            FacturaParticular tab = entry.getValue();
-            totalFactures = totalFactures + tab.getTotal();
-        }
         for (FacturaParticular factura : factures.values()) {
             totalFactures = totalFactures + factura.getTotal();
         }
         return totalFactures;
+    }
+    
+        public ArrayList<FacturaParticular> getFactures() {
+        ArrayList<FacturaParticular> copia = new ArrayList<>();
+        for (FacturaParticular factura : factures.values()) {
+            copia.add(factura);
+        }
+        return copia;
+    }
+    
+    public void afegirFactura(FacturaParticular fp){
+        factures.put(fp.getCodiFactura(), fp);
     }
 }
