@@ -1,12 +1,14 @@
 package cat.iespaucasesnoves.persones;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alumne
  */
-public abstract class Empleat {
+public abstract class Empleat implements Serializable{
 
-    private static int numeroEmpleat = 0;
+    private static int numeroEmpleat = 1;
     private final int codi;
     private String nomComplet;
     private String identificador;
@@ -92,4 +94,10 @@ public abstract class Empleat {
         this.salariBase = salariBase;
     }
 
+    @Override
+    public String toString() {
+        return "Empleat{" + "codi=" + codi + ", nomComplet=" + nomComplet + ", identificador=" + identificador + ", email=" + email + ", telefon=" + telefon + ", direccio=" + direccio + ", categoria=" + categoria + ", salariBase=" + salariBase + '}';
+    }
+
+    
 }

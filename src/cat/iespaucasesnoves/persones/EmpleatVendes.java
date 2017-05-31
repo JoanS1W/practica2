@@ -87,4 +87,7 @@ public class EmpleatVendes extends Empleat {
             throw new AccioNoRealitzable("Factura no disponible.");
         }
     }
+    
+    
+    
 }
