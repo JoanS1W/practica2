@@ -6,23 +6,28 @@ package cat.iespaucasesnoves.facturacio;
  */
 public class Jugueta {
 
-    int codi;
-    String nom;
+	int codi;
+	String nom;
 
-    public int getCodi() {
-        return codi;
-    }
+	public Jugueta(int codi, String nom) {
+		this.codi = codi;
+		this.nom = nom;
+	}
 
-    public void setCodi(int codi) {
-        this.codi = codi;
-    }
+	public int getCodi() {
+		return codi;
+	}
 
-    public String getNom() {
-        return nom;
-    }
+	public void setCodi(int codi) {
+		this.codi = codi;
+	}
 
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
 
 }
