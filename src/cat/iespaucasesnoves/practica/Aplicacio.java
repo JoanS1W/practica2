@@ -29,8 +29,8 @@ public class Aplicacio {
 
     private HashMap<Integer, EmpleatVendes> empleatsVendes = new HashMap<>();
     private HashMap<Integer, EmpleatGeneral> empleatsGenerals = new HashMap<>();
-    private HashMap<Integer, Empresa> empreses = new HashMap<>();
-    private HashMap<Integer, Particular> particulars = new HashMap<>();
+    private HashMap<String, Empresa> empreses = new HashMap<>();
+    private HashMap<String, Particular> particulars = new HashMap<>();
     private HashMap<Integer, Jugueta> juguetes = new HashMap<>();
 
     public ArrayList<EmpleatVendes> getEmpleatsVendes() {
@@ -82,13 +82,11 @@ public class Aplicacio {
     }
 
     public void afegirEmpreses(Empresa empresa) {
-        //this.empreses.put(empresa.getIdentificador(), empresa);
+        this.empreses.put(empresa.getIdentificador(), empresa);
     }
-    //AQUESTS DOS IDENTIFICADORS no poden ser strings si els hem de ficar com a
-    //clau, o feim una clau int per ells o canviem l'identificador a int però no 
-    //se si això podia ser dni... de totes formes podriem fer dni sense lletra, no se
+
     public void afegirParticulars(Particular particular) {
-        //this.particulars.put(particular.getIdentificador(), particular);
+        this.particulars.put(particular.getIdentificador(), particular);
     }
 
     public void afegirJuguetes(Jugueta jugueta) {
@@ -169,14 +167,6 @@ public class Aplicacio {
         } else {
             throw new AccioNoRealitzable("Aquest client no disposa d'aquest format de factura.");
         }
-    }
-
-    public void afegirProducteFacturaParticular(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat, double preuUnitari){
-        
-    }
-    
-    public void modificarFacturaParticular(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat, double preuUnitari){
-        
     }
 
     public void mostrarFacturesClient(int client){

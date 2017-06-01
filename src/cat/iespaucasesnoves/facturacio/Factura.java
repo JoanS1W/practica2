@@ -22,7 +22,7 @@ public abstract class Factura {
     private boolean pagada;
     private double total;
 
-    private static int numeroFactura = 0;
+    private static int numeroFactura = 1;
     private final int codiFactura;
 
     /**
@@ -52,7 +52,8 @@ public abstract class Factura {
         this.data = now();
         this.pagada = false;
 
-        codiFactura = numeroFactura++;
+        codiFactura = numeroFactura;
+        numeroFactura++;
 
     }
 
