@@ -40,38 +40,58 @@ public class Aplicacio {
         return copia;
     }
 
-    //TODO lo de de adalt copies.
-    public HashMap<Integer, EmpleatGeneral> getEmpleatsGenerals() {
-        return empleatsGenerals;
+    public ArrayList<EmpleatGeneral> getEmpleatsGenerals() {
+        ArrayList<EmpleatGeneral> copia = new ArrayList<>();
+        for (EmpleatGeneral empleat : empleatsGenerals.values()) {
+            copia.add(empleat);
+        }
+        return copia;
     }
 
-    public HashMap<Integer, Empresa> getEmpreses() {
-        return empreses;
+    public ArrayList<Empresa> getEmpreses() {
+        ArrayList<Empresa> copia = new ArrayList<>();
+        for (Empresa empresa : empreses.values()) {
+            copia.add(empresa);
+        }
+        return copia;
     }
 
-    public HashMap<Integer, Particular> getParticulars() {
-        return particulars;
+    public ArrayList<Particular> getParticulars() {
+        ArrayList<Particular> copia = new ArrayList<>();
+        for (Particular particular : particulars.values()) {
+            copia.add(particular);
+        }
+        return copia;
     }
 
-    public HashMap<Integer, Jugueta> getJuguetes() {
-        return juguetes;
+    public ArrayList<Jugueta> getJuguetes() {
+        ArrayList<Jugueta> copia = new ArrayList<>();
+        for (Jugueta jugueta : juguetes.values()) {
+            copia.add(jugueta);
+        }
+        return copia;
     }
 
     public void afegirEmpleatsVendes(EmpleatVendes empleat) {
         this.empleatsVendes.put(empleat.getCodi(), empleat);
     }
 
-    //TODO 
-    public void afegirEmpleatsGenerals(HashMap<Integer, EmpleatGeneral> empleatsGenerals) {
-        this.empleatsGenerals = empleatsGenerals;
+    public void afegirEmpleatsGenerals(EmpleatGeneral empleat) {
+        this.empleatsGenerals.put(empleat.getCodi(), empleat);
     }
 
-    public void afegirEmpreses(HashMap<Integer, Empresa> empreses) {
-        this.empreses = empreses;
+    public void afegirEmpreses(Empresa empresa) {
+        //this.empreses.put(empresa.getIdentificador(), empresa);
+    }
+    //AQUESTS DOS IDENTIFICADORS no poden ser strings si els hem de ficar com a
+    //clau, o feim una clau int per ells o canviem l'identificador a int però no 
+    //se si això podia ser dni... de totes formes podriem fer dni sense lletra, no se
+    public void afegirParticulars(Particular particular) {
+        //this.particulars.put(particular.getIdentificador(), particular);
     }
 
-    public void afegirParticulars(HashMap<Integer, Particular> particulars) {
-        this.particulars = particulars;
+    public void afegirJuguetes(Jugueta jugueta) {
+        this.juguetes.put(jugueta.getCodi(), jugueta);
     }
 
     public void afegirJuguetes(HashMap<Integer, Jugueta> juguetes) {

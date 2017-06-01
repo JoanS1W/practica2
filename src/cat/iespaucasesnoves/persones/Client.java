@@ -13,6 +13,7 @@ public abstract class Client {
     String nom;
     //HashMap<Integer, Factura> factures = new HashMap<>();
 
+
     public abstract double calcularFactura();
 
     public String getIdentificador() {
