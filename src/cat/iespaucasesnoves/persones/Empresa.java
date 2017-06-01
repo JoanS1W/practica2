@@ -10,19 +10,21 @@ import java.util.HashMap;
  */
 public class Empresa extends Client {
 
-	HashMap<Integer, FacturaEmpresa> factures;
+	private HashMap<Integer, FacturaEmpresa> factures;
 
 	public Empresa (String identificador, String nom) {
         super(identificador, nom);
         this.factures = new HashMap<>();
 
-	@Override
-	public double calcularFactura() {
-		double totalFactures = 0;
+        }
+ 
+        @Override
+	public double calcularFacturacio() {
+		double totalFacturat = 0;
 		for (FacturaEmpresa factura : factures.values()) {
-			totalFactures = totalFactures + factura.getTotal();
+			totalFacturat = totalFacturat + factura.getTotal();
 		}
-		return totalFactures;
+		return totalFacturat;
 	}
 
 	public ArrayList<FacturaEmpresa> getFactures() {
@@ -36,4 +38,5 @@ public class Empresa extends Client {
 	public void afegirFactura(FacturaEmpresa fe) {
 		factures.put(fe.getCodiFactura(), fe);
 	}
+
 }

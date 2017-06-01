@@ -1,7 +1,6 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.facturacio.Factura;
-import java.util.HashMap;
+
 
 /**
  *
@@ -11,10 +10,13 @@ public abstract class Client {
 
     String identificador;
     String nom;
-    //HashMap<Integer, Factura> factures = new HashMap<>();
 
+    public Client(String identificador, String nom) {
+        this.identificador = identificador;
+        this.nom = nom;
+    }    
 
-    public abstract double calcularFactura();
+    public abstract double calcularFacturacio();
 
     public String getIdentificador() {
         return identificador;

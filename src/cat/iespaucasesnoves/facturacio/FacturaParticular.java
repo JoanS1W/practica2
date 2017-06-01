@@ -6,9 +6,9 @@ public class FacturaParticular extends Factura {
 
     private double importPagat;
 
-    public FacturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagat) {
+    public FacturaParticular(int producte, int quantitat, double preuUnitari, int descompte) {
         super(producte, quantitat, preuUnitari, descompte);
-        this.importPagat = importPagat;
+        this.importPagat = quantitat*preuUnitari;
     }
 
     public double getImportPagat() {
