@@ -1,5 +1,6 @@
 package cat.iespaucasesnoves.facturacio;
 
+import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
 
 public class FacturaParticular extends Factura {
 
@@ -14,10 +15,14 @@ public class FacturaParticular extends Factura {
         return importPagat;
     }
 
-    //TODO si pagada no modificable
-    public void setImportPagat(double importPagat) {
-        this.importPagat = importPagat;
+    //TODO si pagada no modificable FET, mirar si es correcte.
+    public void setImportPagat(double importPagat) throws ExcepcioPagada {
+        if (isPagada()) {
+            throw new ExcepcioPagada("Factura PAGADA no modificable");
+        } else {
+            this.importPagat = importPagat;
+        }
+
     }
-    
-    
+
 }

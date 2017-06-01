@@ -9,7 +9,7 @@ import java.time.Year;
  * @author alumne
  */
 public class FacturaEmpresa extends Factura {
-
+    //Fer getters i setters amb if pagada?
     private TerminiPagament pagament;
     private String banc;
     private String metodeDePagament;
@@ -25,8 +25,8 @@ public class FacturaEmpresa extends Factura {
     private int codiClient;
 
     /**
-     * Tendrem dos constructors per la factura d'empresa, un per les que tenen
-     * IBAN i l'altra per TARGETES.
+     * Tendrem dos constructors en sobrecarrega per la factura d'empresa,
+     * un per les que tenen IBAN i l'altra per TARGETES.
      */
     public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
         super(producte, quantitat, preuUnitari, descompte);
