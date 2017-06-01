@@ -6,6 +6,7 @@
 package cat.iespaucasesnoves.practica;
 
 import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
+import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
 import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
 import cat.iespaucasesnoves.facturacio.FacturaParticular;
 import cat.iespaucasesnoves.facturacio.Jugueta;
@@ -135,6 +136,24 @@ public class Aplicacio {
 
     }
 
+    public void afegirProducteFacturaEmpresa(int codiEmpleat, int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable{
+        /*L'empleat és de VENDES, el client és una EMPRESA i la JUGUETA existeix al nostre sistema?*/
+        if (empleatsVendes.containsKey(codiEmpleat) && juguetes.containsKey(producte)) {
+            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
+            //Nomes l'empleat que ha creat la factura li podra afegir productes, sino retorna excepcio que tractarem a Proves.
+            empleat.afegirLiniaFacturaEmpresa(codiFactura, producte, quantitat, preuUnitari);
+        }
+    }    
+    
+    public void modificaFacturaEmpresa(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable{
+        /*L'empleat és de VENDES, el client és una EMPRESA i la JUGUETA existeix al nostre sistema?*/
+        if (empleatsVendes.containsKey(codiEmpleat) && juguetes.containsKey(producte)) {
+            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
+            //Nomes l'empleat que ha creat la factura li podra afegir productes, sino retorna excepcio que tractarem a Proves.
+            empleat.modificarLiniaFacturaEmpresa(codiFactura, linia, producte, quantitat, preuUnitari);
+        }
+    }
+    
     public void crearFacturaParticular(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari, int descompte, double importPagat)throws AccioNoRealitzable{
         
         /*L'empleat és GENERAL i el client a qui li volem fer la factura és un PARTICULAR?*/
@@ -152,5 +171,18 @@ public class Aplicacio {
         }
     }
 
+    public void afegirProducteFacturaParticular(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat, double preuUnitari){
+        
+    }
+    
+    public void modificarFacturaParticular(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat, double preuUnitari){
+        
+    }
 
+    public void mostrarFacturesClient(int client){
+        
+    }
+    public void mostrarFacturesEmpleat(int codiEmpleat){
+        
+    }
 }

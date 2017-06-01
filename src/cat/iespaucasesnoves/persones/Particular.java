@@ -1,6 +1,6 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
+
 import cat.iespaucasesnoves.facturacio.FacturaParticular;
 import java.util.ArrayList;
 import java.util.HashMap;
