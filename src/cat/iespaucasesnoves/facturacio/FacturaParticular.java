@@ -1,6 +1,5 @@
 package cat.iespaucasesnoves.facturacio;
 
-import java.time.LocalDate;
 
 public class FacturaParticular extends Factura {
 
@@ -10,4 +9,15 @@ public class FacturaParticular extends Factura {
         super(producte, quantitat, preuUnitari, descompte);
         this.importPagat = importPagat;
     }
+
+    public double getImportPagat() {
+        return importPagat;
+    }
+
+    //TODO si pagada no modificable
+    public void setImportPagat(double importPagat) {
+        this.importPagat = importPagat;
+    }
+    
+    
 }
