@@ -33,17 +33,18 @@ public class EmpleatGeneral extends Empleat {
     }
     
         /*metodes per crear i gestionar factura per l'empleat general*/
-    public FacturaParticular facturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagat) {
+    public FacturaParticular facturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagar) {
 
-        FacturaParticular novaFactura = new FacturaParticular(producte, quantitat, preuUnitari, descompte, importPagat);
+        FacturaParticular novaFactura = new FacturaParticular(producte, quantitat, preuUnitari, descompte, importPagar);
         /*retornam factura per tal d'associar-la al client*/
         return novaFactura;
 
     }
 
-    public void afegirLiniaFactura(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
+    public void afegirLiniaFacturaParticular(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
 
         //TODO afegir linia?
+        
     }
 
 }

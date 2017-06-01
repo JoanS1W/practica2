@@ -65,7 +65,7 @@ public class EmpleatVendes extends Empleat {
         return novaFactura;
     }
 
-    public void afegirLiniaFactura(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+    public void afegirLiniaFacturaEmpresa(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
 
         if (vendes.containsKey(codiFactura)) {
             FacturaEmpresa factura = vendes.get(codiFactura);
@@ -77,12 +77,12 @@ public class EmpleatVendes extends Empleat {
 
     }
 
-    public void modificarFactura(int codiFactura, int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+    public void modificarLiniaFacturaEmpresa(int codiFactura, int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
 
         if (vendes.containsKey(codiFactura)) {
             FacturaEmpresa factura = vendes.get(codiFactura);
             //aquest metode torna excepcio de factura no pagada que propagam fins que les tractem totes al main.
-            factura.afegirLiniaFactura(producte, quantitat, preuUnitari);
+            factura.modificarLiniaFactura(numeroLinia, producte, quantitat, preuUnitari);
         } else {
             throw new AccioNoRealitzable("Factura no disponible.");
         }

@@ -21,8 +21,8 @@ public class FacturaEmpresa extends Factura {
     private String numTargeta;
     private Month mesCaducitat;
     private Year anyCaducitat;
-    /*CLIENT*/
-    private int codiClient;
+    /*CLIENT??????????*/
+//    private int codiClient;
 
     /**
      * Tendrem dos constructors en sobrecarrega per la factura d'empresa,
