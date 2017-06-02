@@ -13,9 +13,9 @@ import java.io.IOException;
 public class Proves {
 
     /* metode on cream dades y guardam objecte Aplicacio dins fitxer */
-    public static void copiarDadesInicialsFitxer(String uri) {
+    public static void copiarDadesInicialsFitxer(String uri, Aplicacio app) {
         
-        Aplicacio app = new Aplicacio();
+//        Aplicacio app = new Aplicacio();
         // 4 empleats vendes.
         EmpleatVendes ev1 = new EmpleatVendes("Miguel", "dni", "@gmail.com", "123 456 789", "carrer",
                 CategoriaEmpleat.TECNIC, 2000, 20);
@@ -31,16 +31,16 @@ public class Proves {
         app.afegirEmpleatsVendes(ev3);
         app.afegirEmpleatsVendes(ev4);
         // 3 empleats generals
-        EmpleatGeneral eg1 = new EmpleatGeneral("M.A", "dni", "@gmail.com", "123 456 789", "carrer",
-                CategoriaEmpleat.DIRECTIU, 3000, 30, 0);
-        EmpleatGeneral eg2 = new EmpleatGeneral("J.S", "nif", "@gmail.com", "123 456 789", "gran via",
-                CategoriaEmpleat.TECNIC, 2000, 20, 0);
-        EmpleatGeneral eg3 = new EmpleatGeneral("T.X", "nie", "@gmail.com", "123 456 789", "carrer",
-                CategoriaEmpleat.AUXILIAR, 1000, 10, 0);
+        EmpleatGeneral eg5 = new EmpleatGeneral("M.A", "dni", "@gmail.com", "123 456 789", "carrer",
+                CategoriaEmpleat.DIRECTIU, 3000, 30, 10);
+        EmpleatGeneral eg6 = new EmpleatGeneral("J.S", "nif", "@gmail.com", "123 456 789", "gran via",
+                CategoriaEmpleat.TECNIC, 2000, 20, 20);
+        EmpleatGeneral eg7 = new EmpleatGeneral("T.X", "nie", "@gmail.com", "123 456 789", "carrer",
+                CategoriaEmpleat.AUXILIAR, 1000, 10, 3);
         // afegim empleats generals a la app.
-        app.afegirEmpleatsGenerals(eg1);
-        app.afegirEmpleatsGenerals(eg2);
-        app.afegirEmpleatsGenerals(eg3);
+        app.afegirEmpleatsGenerals(eg5);
+        app.afegirEmpleatsGenerals(eg6);
+        app.afegirEmpleatsGenerals(eg7);
         /* TODO */
         // Empreses.
         Empresa emp1 = new Empresa("EMP1", "Empresa1");
@@ -96,19 +96,19 @@ public class Proves {
         EinesObjectesStream.escriuObjecte(uri, app);
     }
 
-    public Objectt static void carregarDadesInicialsFitxer(String uri) {
+    public static void carregarDadesInicialsFitxer(String uri) {
         
-        return EinesObjectesStream.llegeixObjecte(uri);
+        
         
     }
 
     public static void main(String[] args) {
 
-        
-        copiarDadesInicialsFitxer("fitxerInicial.dat");
+         Aplicacio app = new Aplicacio();
+        copiarDadesInicialsFitxer("fitxerInicial.dat",app);
         carregarDadesInicialsFitxer("fitxerInicial.dat");
         
-        Aplicacio app = new Aplicacio();
+       
         
         //crear xml amb l'empleat i la seva nomina.
         try {
@@ -117,9 +117,35 @@ public class Proves {
             System.out.println(ex.getMessage());
         }
         try {
-            System.out.println(app.calcularFacturacio("EMP1"));;
+            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : "+app.calcularNominaEmpleat(5));
         } catch (AccioNoRealitzable ex) {
             System.out.println(ex);
+        }
+                /*try {
+            app.nouEmpleatVendes("Tofol", "7596584G", "@gmail.com", "123 456 789", "carrer",
+                    CategoriaEmpleat.TECNIC, 2000, 20);
+        } catch (AccioNoRealitzable ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+        try {
+            app.crearFacturaEmpresa(1, "EMP1", 1, 50, 85.65, 10, "LaCaixa", TerminiPagament.DIARI, "+34", "85214566981");
+        } catch (AccioNoRealitzable ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+        try {
+            System.out.println(app.calcularFacturacio("EMP1"));
+        } catch (AccioNoRealitzable ex) {
+            System.out.println(ex);
+        }*/
+        try {
+            app.crearFacturaParticular(6, "PAR1", 2, 50, 10, 10);
+        } catch (AccioNoRealitzable ex) {
+            System.out.println("ERROR: "+ex.getMessage());
+        }
+        try {
+            System.out.println(app.calcularFacturacio("PAR1"));
+        } catch (AccioNoRealitzable ex) {
+            System.out.println("ERROR: "+ex.getMessage());
         }
 
     }

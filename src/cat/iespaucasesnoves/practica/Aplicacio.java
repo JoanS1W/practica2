@@ -7,6 +7,8 @@ import cat.iespaucasesnoves.facturacio.FacturaParticular;
 import cat.iespaucasesnoves.facturacio.Jugueta;
 import cat.iespaucasesnoves.facturacio.TerminiPagament;
 import cat.iespaucasesnoves.persones.*;
+import cat.iespaucasesnoves.swpro.streams.EinesBufferedStreams;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,7 +19,7 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Aplicacio implements Serializable{
+public class Aplicacio implements Serializable {
 
     private HashMap<Integer, EmpleatVendes> empleatsVendes = new HashMap<>();
     private HashMap<Integer, EmpleatGeneral> empleatsGenerals = new HashMap<>();
@@ -135,7 +137,7 @@ public class Aplicacio implements Serializable{
             /* cream la factura amb IBAN */
             EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
             FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte,
-                     banc, pagament, codiPais, numCompte);
+                    banc, pagament, codiPais, numCompte);
             // associam la factura al client.
             Empresa empresa = empreses.get(identificadorClient);
             empresa.afegirFactura(facturaNova);
@@ -199,20 +201,19 @@ public class Aplicacio implements Serializable{
         }
     }
 
-    public void crearFacturaParticular(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari,
-            int descompte, double importPagat) throws AccioNoRealitzable {
+    public void crearFacturaParticular(int codiEmpleat, String indetificadorClient, int producte, int quantitat, double preuUnitari,
+            int descompte) throws AccioNoRealitzable {
 
         /*
 		 * L'empleat és GENERAL i el client a qui li volem fer la factura és
 		 * un PARTICULAR?
          */
-        if (empleatsGenerals.containsKey(codiEmpleat) && particulars.containsKey(codiClient)) {
+        if (empleatsGenerals.containsKey(codiEmpleat) && particulars.containsKey(indetificadorClient)) {
             /* cream la factura amb TARGETA */
             EmpleatGeneral empleat = empleatsGenerals.get(codiEmpleat);
-            FacturaParticular facturaNova = empleat.facturaParticular(producte, quantitat, preuUnitari, descompte,
-                    importPagat);
+            FacturaParticular facturaNova = empleat.facturaParticular(producte, quantitat, preuUnitari, descompte);
             // associam el que ha pagat al client, per tal de poder tenir una facturacio total a la nostra aplicacio.
-            particulars.get(codiClient).afegirImport(facturaNova.getImportPagat());
+            particulars.get(indetificadorClient).afegirImport(facturaNova.getImportPagat());
         } else if (!empleatsGenerals.containsKey(codiEmpleat)) {
             throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
         } else {
@@ -231,21 +232,43 @@ public class Aplicacio implements Serializable{
     }
 
     public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzable {
-        if (e instanceof EmpleatVendes) {
-            return ((EmpleatVendes) e).calcularNomina();
-        } else if (e instanceof EmpleatGeneral) {
-            return ((EmpleatVendes) e).calcularNomina();
+        Empleat empleat = cercarEmpleat(codiEmpleat);
+        if (empleat != null) {
+            return empleat.calcularNomina();
         } else {
             throw new AccioNoRealitzable("Empleat inexistenx.");
         }
     }
 
-    public void nouEmpleatVendes() {
-
+    //NOUS EMPLEATS JA FUNCIONEN
+    public void nouEmpleatVendes(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double comissio) throws AccioNoRealitzable {
+        EmpleatVendes empleat = new EmpleatVendes(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, comissio);
+        for (Empleat emp : empleatsVendes.values()) {
+            if (emp.equals(empleat)) {
+                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+            }
+        }
+        for (Empleat emp : empleatsGenerals.values()) {
+            if (emp.equals(empleat)) {
+                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+            }
+        }
+        empleatsVendes.put(empleat.getCodi(), empleat);
     }
 
-    public void nouEmpleatGeneral() {
-
+    public void nouEmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora) throws AccioNoRealitzable {
+        EmpleatGeneral empleat = new EmpleatGeneral(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, horesExtres, preuHora);
+        for (Empleat emp : empleatsGenerals.values()) {
+            if (emp.equals(empleat)) {
+                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+            }
+        }
+        for (Empleat emp : empleatsVendes.values()) {
+            if (emp.equals(empleat)) {
+                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+            }
+        }
+        empleatsGenerals.put(empleat.getCodi(), empleat);
     }
 
     public void nouClientEmpresa() {
@@ -260,27 +283,30 @@ public class Aplicacio implements Serializable{
 
     }
 
-    public void llistaFacturacioParametritzada(){
-        
+    public void llistaFacturacioParametritzada() {
+
     }
-    
-    public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable{
+
+    public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable {
         //cercam si exiteix un client amb aquest identificador.
-       Client client = cercarClient(identificadorClient);
-      
-        if (client instanceof Empresa) {
-            return ((Empresa)client).calcularFacturacio();
-        }else if (client instanceof Particular) {
-            
-            return ((Particular)client).calcularFacturacio();
-        }else{
+        Client client = cercarClient(identificadorClient);
+        if (client != null) {
+            return client.calcularFacturacio();
+        }
+//        if (client instanceof Empresa) {
+//            return client.calcularFacturacio();
+//        } else if (client instanceof Particular) {
+//
+//            return client.calcularFacturacio();
+//        } 
+        else {
             throw new AccioNoRealitzable("El client no existeix al sistema");
         }
-        
+
     }
-    
+
     //metodes de cerca de l'objecte ja que desde la aplicacio lo normal sera executar els metodes amb els codis identificatius.
-    public Client cercarClient(String identificadorClient){
+    public Client cercarClient(String identificadorClient) {
         for (Empresa empresa : empreses.values()) {
             if (empresa.getIdentificador().equals(identificadorClient)) {
                 return empresa;
@@ -289,6 +315,21 @@ public class Aplicacio implements Serializable{
         for (Particular particular : particulars.values()) {
             if (particular.getIdentificador().equals(identificadorClient)) {
                 return particular;
+            }
+        }
+        return null;
+    }
+
+    public Empleat cercarEmpleat(int codiEmpleat) {
+        for (EmpleatVendes ev : empleatsVendes.values()) {
+            if (ev.getCodi() == codiEmpleat) {
+                return ev;
+            }
+        }
+
+        for (EmpleatGeneral eg : empleatsGenerals.values()) {
+            if (eg.getCodi() == codiEmpleat) {
+                return eg;
             }
         }
         return null;

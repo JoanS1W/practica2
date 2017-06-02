@@ -23,16 +23,16 @@
 	<EmpleatGeneral>
 		<identificador>dni</identificador>
 		<nom>M.A</nom>
-		<dni>3000.0</dni>
+		<dni>3300.0</dni>
 	</EmpleatVendes>
 	<EmpleatGeneral>
 		<identificador>nif</identificador>
 		<nom>J.S</nom>
-		<dni>2000.0</dni>
+		<dni>2400.0</dni>
 	</EmpleatVendes>
 	<EmpleatGeneral>
 		<identificador>nie</identificador>
 		<nom>T.X</nom>
-		<dni>1000.0</dni>
+		<dni>1030.0</dni>
 	</EmpleatVendes>
 </Empleats>

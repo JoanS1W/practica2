@@ -30,7 +30,7 @@ public abstract class Empleat implements Serializable{
     }
 
     /*metodes abstractes que hauran d'implementar les clases heretades*/
-    abstract double calcularNomina();
+    public abstract double calcularNomina();
 
     /*getters de tots atributs menys del codi que es final*/
     public int getCodi() {
