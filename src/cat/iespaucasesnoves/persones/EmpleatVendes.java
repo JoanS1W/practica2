@@ -49,12 +49,8 @@ public class EmpleatVendes extends Empleat {
 
         FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, banc, pagament, codiPais, numCompte);
         /*insertam la factura dins el llistat de vendes de l'empleat*/
-                //borrar
-        System.out.println(novaFactura.getCodiFactura()+"  "+novaFactura);
         //xk no introdueix res al hashmap??
         vendes.put(novaFactura.getCodiFactura(), novaFactura);
-        System.out.println(vendes.containsKey(novaFactura.getCodiFactura()));
-        System.out.println(vendes.get(novaFactura.getCodiFactura()));
         /*retornam factura per tal de guardar-la dins el client*/
         return novaFactura;
 
