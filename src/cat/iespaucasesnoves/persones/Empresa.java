@@ -39,4 +39,10 @@ public class Empresa extends Client {
 		factures.put(fe.getCodiFactura(), fe);
 	}
 
+    @Override
+    public String toString() {
+        return "Empresa : {" + super.toString() + ", totalFactures = " + factures.size() + "}";
+    }
+
+        
 }

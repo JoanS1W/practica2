@@ -1,6 +1,7 @@
 package cat.iespaucasesnoves.facturacio;
 
 import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import java.io.Serializable;
 import java.time.LocalDate;
 import static java.time.LocalDate.now;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author alumnes
  * @version 1 *
  */
-public abstract class Factura {
+public abstract class Factura implements Serializable{
 
     private ArrayList<Integer> productes;
     private ArrayList<Integer> quantitats;

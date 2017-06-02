@@ -1,12 +1,14 @@
 package cat.iespaucasesnoves.persones;
 
+import java.io.Serializable;
+
 
 
 /**
  *
  * @author alumne
  */
-public abstract class Client {
+public abstract class Client implements Serializable {
 
     String identificador;
     String nom;
@@ -36,7 +38,7 @@ public abstract class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "identificador=" + identificador + ", nom=" + nom + '}';
+        return "identificador = " + identificador + ", nom = " + nom ;
     }
     
     

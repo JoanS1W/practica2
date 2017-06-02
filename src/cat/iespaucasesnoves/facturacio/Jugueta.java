@@ -1,10 +1,12 @@
 package cat.iespaucasesnoves.facturacio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author alumne
  */
-public class Jugueta {
+public class Jugueta implements Serializable{
 
 	int codi;
 	String nom;

@@ -40,4 +40,5 @@ public class EmpleatGeneral extends Empleat {
         return novaFactura;
 
     }
+    
 }

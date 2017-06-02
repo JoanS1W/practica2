@@ -37,4 +37,10 @@ public class Particular extends Client {
         }
         return copia;
     }
+    
+        @Override
+    public String toString() {
+        return "Particular : {" + super.toString() + ", totalCompres = " + importsPagats.size() + "}";
+    }
+
 }

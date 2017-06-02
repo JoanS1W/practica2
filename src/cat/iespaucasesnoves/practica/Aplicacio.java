@@ -87,10 +87,6 @@ public class Aplicacio implements Serializable {
         this.juguetes.put(jugueta.getCodi(), jugueta);
     }
 
-    public void afegirJuguetes(HashMap<Integer, Jugueta> juguetes) {
-        this.juguetes = juguetes;
-    }
-
     public File crearXml() throws IOException {
         File arxiu = new File("arxiu.xml");
         FileWriter fileWriter = new FileWriter(arxiu);
@@ -124,7 +120,7 @@ public class Aplicacio implements Serializable {
 
     }
 
-    /* metodes per crear factures */
+    /* metodes per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio, com es que he fet a crearFacturaParticular
     public void crearFacturaEmpresa(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
             int descompte, String banc, TerminiPagament pagament, String codiPais, String numCompte)
             throws AccioNoRealitzable {
@@ -201,7 +197,7 @@ public class Aplicacio implements Serializable {
         }
     }
 
-    public void crearFacturaParticular(int codiEmpleat, String indetificadorClient, int producte, int quantitat, double preuUnitari,
+    public String crearFacturaParticular(int codiEmpleat, String indetificadorClient, int producte, int quantitat, double preuUnitari,
             int descompte) throws AccioNoRealitzable {
 
         /*
@@ -219,6 +215,7 @@ public class Aplicacio implements Serializable {
         } else {
             throw new AccioNoRealitzable("Aquest client no disposa d'aquest format de factura.");
         }
+        return "Factura executada correctament.";
     }
 
     //ha de ser empresa
