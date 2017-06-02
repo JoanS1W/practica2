@@ -51,6 +51,7 @@ public abstract class Factura {
         this.descompte = descompte;
         this.data = now();
         this.pagada = false;
+        this.total= quantitat*preuUnitari;
 
         codiFactura = numeroFactura;
         numeroFactura++;
@@ -137,4 +138,11 @@ public abstract class Factura {
             total = total + (preuUnitari * quantitat);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Factura{" + "productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + ", codiFactura=" + codiFactura + '}';
+    }
+    
+    
 }

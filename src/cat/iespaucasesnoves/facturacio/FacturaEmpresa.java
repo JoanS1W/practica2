@@ -28,7 +28,7 @@ public class FacturaEmpresa extends Factura {
      * Tendrem dos constructors en sobrecarrega per la factura d'empresa,
      * un per les que tenen IBAN i l'altra per TARGETES.
      */
-    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
+    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
         super(producte, quantitat, preuUnitari, descompte);
         this.pagament = pagament;
         this.codiPais = codiPais;
@@ -38,7 +38,7 @@ public class FacturaEmpresa extends Factura {
 
     }
 
-    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat) {
+    public FacturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducitat) {
         super(producte, quantitat, preuUnitari, descompte);
         this.pagament = pagament;
         this.numTargeta = numTargeta;
@@ -49,4 +49,10 @@ public class FacturaEmpresa extends Factura {
 
     }
 
+    @Override
+    public String toString() {
+        return super.toString()+ "pagament=" + pagament + ", banc=" + banc + ", metodeDePagament=" + metodeDePagament + ", codiPais=" + codiPais + ", digitControl=" + digitControl + ", numCompte=" + numCompte + ", numTargeta=" + numTargeta + ", mesCaducitat=" + mesCaducitat + ", anyCaducitat=" + anyCaducitat + '}';
+    }
+
+    
 }

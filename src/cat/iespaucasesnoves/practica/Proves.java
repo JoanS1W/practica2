@@ -1,5 +1,6 @@
 package cat.iespaucasesnoves.practica;
 
+import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
 import cat.iespaucasesnoves.facturacio.*;
 import cat.iespaucasesnoves.persones.*;
 import java.time.LocalDate;
@@ -70,8 +71,8 @@ public class Proves {
         Jugueta jug1 = new Jugueta(1, "Jugueta1");
         Jugueta jug2 = new Jugueta(2, "Jugueta2");
         Jugueta jug3 = new Jugueta(3, "Jugueta3");
-        Jugueta jug4 = new Jugueta(1, "Jugueta4");
-        Jugueta jug5 = new Jugueta(1, "Jugueta5");
+        Jugueta jug4 = new Jugueta(4, "Jugueta4");
+        Jugueta jug5 = new Jugueta(5, "Jugueta5");
         app.afegirJuguetes(jug1);
         app.afegirJuguetes(jug2);
         app.afegirJuguetes(jug3);
@@ -81,6 +82,13 @@ public class Proves {
                 TODO
          */
         // Factures per Empreses.
+        app.crearFacturaEmpresa(ev1.getCodi(), "EMP1", 1, 5, 10, 1, "BMN", TerminiPagament.DIARI, "+34", "ASDFG12233");
+        FacturaEmpresa fe1 = ev1.facturaEmpresa(1, 5, 10, 1, "BMN", TerminiPagament.DIARI, "+34", "ASDFG12233");
+        FacturaEmpresa fe2 = ev1.facturaEmpresa(2, 5, 10, 1, "REF", TerminiPagament.DIARI, "+34", "AAAAAAAAA");
+        FacturaEmpresa fe3 = ev1.facturaEmpresa(1, 5, 10, 1, "TTY", TerminiPagament.DIARI, "+34", "BBBBBBBBB");
+        FacturaEmpresa fe4 = ev1.facturaEmpresa(4, 5, 10, 1, "UUU", TerminiPagament.DIARI, "+34", "RRRRRRRRRRR");
+        FacturaEmpresa fe5 = ev2.facturaEmpresa(3, 5, 10, 1, "III", TerminiPagament.DIARI, "+34", "TTTTTTTTTT");
+        FacturaEmpresa fe6 = ev2.facturaEmpresa(1, 5, 10, 3, "OOL", TerminiPagament.DIARI, "+34", "YUUYUUUU");
         // Factures per Client(importsPagats)
 
         // copiam objecte aplicacio al fitxer.
@@ -101,9 +109,14 @@ public class Proves {
         
         //crear xml amb l'empleat i la seva nomina.
         try {
-            app.crearXML();
+            app.crearXml();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
+        }
+        try {
+            app.calcularFacturacio("EMP1");
+        } catch (AccioNoRealitzable ex) {
+            System.out.println(ex);
         }
 
     }

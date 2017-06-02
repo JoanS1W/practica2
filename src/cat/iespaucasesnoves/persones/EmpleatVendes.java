@@ -4,7 +4,6 @@ import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
 import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
 import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
 import cat.iespaucasesnoves.facturacio.TerminiPagament;
-import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
@@ -33,11 +32,11 @@ public class EmpleatVendes extends Empleat {
 
     //Cream una copia per a no passar la referencia del nostre mapa
     public ArrayList<FacturaEmpresa> getVendes() {
-        ArrayList<FacturaEmpresa> facturesEmpleat = new ArrayList<>();
-        for (HashMap.Entry<Integer, FacturaEmpresa> entry : vendes.entrySet()) {
-            facturesEmpleat.add(entry.getValue());
+        ArrayList<FacturaEmpresa> copia = new ArrayList<>();
+        for (FacturaEmpresa facturaEmpresa : vendes.values()) {
+            copia.add(facturaEmpresa);
         }
-        return facturesEmpleat;
+        return copia;
     }
 
     @Override
@@ -46,20 +45,26 @@ public class EmpleatVendes extends Empleat {
     }
 
     /*metodes per crear i gestionar factura per l'empleat*/
-    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
+    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, String banc, TerminiPagament pagament, String codiPais, String numCompte) {
 
-        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, codiPais, numCompte);
+        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, banc, pagament, codiPais, numCompte);
         /*insertam la factura dins el llistat de vendes de l'empleat*/
+                //borrar
+        System.out.println(novaFactura.getCodiFactura()+"  "+novaFactura);
+        //xk no introdueix res al hashmap??
         vendes.put(novaFactura.getCodiFactura(), novaFactura);
+        System.out.println(vendes.containsKey(novaFactura.getCodiFactura()));
+        System.out.println(vendes.get(novaFactura.getCodiFactura()));
         /*retornam factura per tal de guardar-la dins el client*/
         return novaFactura;
 
     }
 
-    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducita) {
+    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte,  String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat, Year anyCaducita) {
 
-        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc, pagament, numTargeta, mesCaducitat, anyCaducita);
+        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, banc, pagament, numTargeta, mesCaducitat, anyCaducita);
         /*insertam la factura dins el llistat de vendes de l'empleat*/
+
         vendes.put(novaFactura.getCodiFactura(), novaFactura);
         /*retornam factura per tal de guardar-la dins el client*/
         return novaFactura;

@@ -6,22 +6,15 @@ import cat.iespaucasesnoves.facturacio.FacturaEmpresa;
 import cat.iespaucasesnoves.facturacio.FacturaParticular;
 import cat.iespaucasesnoves.facturacio.Jugueta;
 import cat.iespaucasesnoves.facturacio.TerminiPagament;
-import cat.iespaucasesnoves.persones.Empleat;
-import cat.iespaucasesnoves.persones.EmpleatGeneral;
-import cat.iespaucasesnoves.persones.EmpleatVendes;
-import cat.iespaucasesnoves.persones.Empresa;
-import cat.iespaucasesnoves.persones.Particular;
-import java.io.BufferedWriter;
+import cat.iespaucasesnoves.persones.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectStreamClass;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class Aplicacio {
 
@@ -95,19 +88,18 @@ public class Aplicacio {
         this.juguetes = juguetes;
     }
 
-    public File crearXML() throws IOException {
+    public File crearXml() throws IOException {
         File arxiu = new File("arxiu.xml");
-        FileWriter fileWriter = new FileWriter(arxiu);     
-  
-        
+        FileWriter fileWriter = new FileWriter(arxiu);
+
         fileWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         fileWriter.write("<Empleats>\n");
-        
+
         for (EmpleatVendes empleat : empleatsVendes.values()) {
             fileWriter.write("\t<EmpleatVendes>\n");
-            fileWriter.write("\t\t<identificador>"+empleat.getIdentificador()+"</identificador>\n");
-            fileWriter.write("\t\t<nom>"+empleat.getNomComplet()+"</nom>\n");
-            fileWriter.write("\t\t<nomina>"+empleat.calcularNomina()+"</nomina>\n");
+            fileWriter.write("\t\t<identificador>" + empleat.getIdentificador() + "</identificador>\n");
+            fileWriter.write("\t\t<nom>" + empleat.getNomComplet() + "</nom>\n");
+            fileWriter.write("\t\t<nomina>" + empleat.calcularNomina() + "</nomina>\n");
             fileWriter.write("\t</EmpleatVendes>\n");
         }
 
@@ -120,13 +112,17 @@ public class Aplicacio {
         }
         fileWriter.write("</Empleats>");
         fileWriter.close();
-        
+
         return arxiu;
 
     }
 
+    public void crearXmlMensual() {
+
+    }
+
     /* metodes per crear factures */
-    public void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari,
+    public void crearFacturaEmpresa(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
             int descompte, String banc, TerminiPagament pagament, String codiPais, String numCompte)
             throws AccioNoRealitzable {
 
@@ -134,13 +130,13 @@ public class Aplicacio {
 		 * L'empleat és de VENDES i el client a qui li volem fer la factura és
 		 * una EMPRESA?
          */
-        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
+        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(identificadorClient)) {
             /* cream la factura amb IBAN */
             EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
             FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte,
-                    LocalDate.now(), banc, pagament, codiPais, numCompte);
+                     banc, pagament, codiPais, numCompte);
             // associam la factura al client.
-            Empresa empresa = empreses.get(codiClient);
+            Empresa empresa = empreses.get(identificadorClient);
             empresa.afegirFactura(facturaNova);
         } else if (!empleatsVendes.containsKey(codiEmpleat)) {
             throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
@@ -150,21 +146,21 @@ public class Aplicacio {
 
     }
 
-    public void crearFacturaEmpresa(int codiEmpleat, int codiClient, int producte, int quantitat, double preuUnitari,
-            int descompte, LocalDate data, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat,
+    public void crearFacturaEmpresa(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
+            int descompte, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat,
             Year anyCaducitat) throws AccioNoRealitzable {
 
         /*
 		 * L'empleat és de VENDES i el client a qui li volem fer la factura és
 		 * una EMPRESA?
          */
-        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(codiClient)) {
+        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(identificadorClient)) {
             /* cream la factura amb TARGETA */
             EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
-            FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte, data, banc,
+            FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte, banc,
                     pagament, numTargeta, mesCaducitat, anyCaducitat);
             // associam la factura al client.
-            Empresa empresa = empreses.get(codiClient);
+            Empresa empresa = empreses.get(identificadorClient);
             empresa.afegirFactura(facturaNova);
         } else if (!empleatsVendes.containsKey(codiEmpleat)) {
             throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
@@ -233,30 +229,69 @@ public class Aplicacio {
 
     }
 
-    public double calcularNominaEmpleat(Empleat e) throws AccioNoRealitzable{
+    public double calcularNominaEmpleat(Empleat e) throws AccioNoRealitzable {
         if (e instanceof EmpleatVendes) {
             return ((EmpleatVendes) e).calcularNomina();
         } else if (e instanceof EmpleatGeneral) {
             return ((EmpleatVendes) e).calcularNomina();
         } else {
-            throw new AccioNoRealitzable("Empleat inexistenx.");            
+            throw new AccioNoRealitzable("Empleat inexistenx.");
         }
     }
-    
-    public void nouEmpleatVendes(){
+
+    public void nouEmpleatVendes() {
+
+    }
+
+    public void nouEmpleatGeneral() {
+
+    }
+
+    public void nouClientEmpresa() {
+
+    }
+
+    public void nouClientParticular() {
+
+    }
+
+    public void llistarMajorFacturacio() {
+
+    }
+
+    public void llistaFacturacioParametritzada(){
         
     }
     
-        public void nouEmpleatGeneral(){
+    public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable{
+        //cercam si exiteix un client amb aquest identificador.
+       Client client = cercarClient(identificadorClient);
+      
+        if (client instanceof Empresa) {
+            //no funciona
+            System.out.println(((Empresa)client).getFactures().size());
+            return ((Empresa)client).calcularFacturacio();
+        }else if (client instanceof Particular) {
+            
+            return ((Particular)client).calcularFacturacio();
+        }else{
+            throw new AccioNoRealitzable("El client no existeix al sistema");
+        }
         
     }
-            public void nouClientEmpresa(){
-        
-    }
-                public void nouClientParticular(){
-        
-    }
-                    public void llistarTresClientsMajorFacturacio(){
-        
+    
+    //metodes de cerca de l'objecte ja que desde la aplicacio lo normal sera executar els metodes amb els codis identificatius.
+    public Client cercarClient(String identificadorClient){
+        for (Empresa empresa : empreses.values()) {
+            if (empresa.getIdentificador().equals(identificadorClient)) {
+                return empresa;
+            }
+        }
+        for (Particular particular : particulars.values()) {
+            if (particular.getIdentificador().equals(identificadorClient)) {
+                return particular;
+            }
+        }
+        return null;
     }
 }
