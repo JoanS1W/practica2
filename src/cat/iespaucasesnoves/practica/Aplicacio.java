@@ -223,10 +223,12 @@ public class Aplicacio {
         }
     }
 
+    //ha de ser empresa
     public void mostrarFacturesClient(int client) {
 
     }
 
+    //ha de ser empleat de vendes
     public void mostrarFacturesEmpleat(int codiEmpleat) {
 
     }
