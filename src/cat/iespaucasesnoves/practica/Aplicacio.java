@@ -10,13 +10,14 @@ import cat.iespaucasesnoves.persones.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Aplicacio {
+public class Aplicacio implements Serializable{
 
     private HashMap<Integer, EmpleatVendes> empleatsVendes = new HashMap<>();
     private HashMap<Integer, EmpleatGeneral> empleatsGenerals = new HashMap<>();
@@ -229,7 +230,7 @@ public class Aplicacio {
 
     }
 
-    public double calcularNominaEmpleat(Empleat e) throws AccioNoRealitzable {
+    public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzable {
         if (e instanceof EmpleatVendes) {
             return ((EmpleatVendes) e).calcularNomina();
         } else if (e instanceof EmpleatGeneral) {

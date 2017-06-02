@@ -13,8 +13,9 @@ import java.io.IOException;
 public class Proves {
 
     /* metode on cream dades y guardam objecte Aplicacio dins fitxer */
-    public static void copiarDadesInicialsFitxer(String uri, Aplicacio app) {
-
+    public static void copiarDadesInicialsFitxer(String uri) {
+        
+        Aplicacio app = new Aplicacio();
         // 4 empleats vendes.
         EmpleatVendes ev1 = new EmpleatVendes("Miguel", "dni", "@gmail.com", "123 456 789", "carrer",
                 CategoriaEmpleat.TECNIC, 2000, 20);
@@ -95,15 +96,19 @@ public class Proves {
         EinesObjectesStream.escriuObjecte(uri, app);
     }
 
-    public static void carregarDadesInicialsFitxer(String uri) {
-
+    public Objectt static void carregarDadesInicialsFitxer(String uri) {
+        
+        return EinesObjectesStream.llegeixObjecte(uri);
+        
     }
 
     public static void main(String[] args) {
 
-        Aplicacio app = new Aplicacio();
-        copiarDadesInicialsFitxer("fitxerInicial.dat", app);
+        
+        copiarDadesInicialsFitxer("fitxerInicial.dat");
         carregarDadesInicialsFitxer("fitxerInicial.dat");
+        
+        Aplicacio app = new Aplicacio();
         
         //crear xml amb l'empleat i la seva nomina.
         try {
