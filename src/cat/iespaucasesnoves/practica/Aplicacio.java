@@ -268,8 +268,6 @@ public class Aplicacio {
        Client client = cercarClient(identificadorClient);
       
         if (client instanceof Empresa) {
-            //no funciona
-            System.out.println(((Empresa)client).getFactures().size());
             return ((Empresa)client).calcularFacturacio();
         }else if (client instanceof Particular) {
             

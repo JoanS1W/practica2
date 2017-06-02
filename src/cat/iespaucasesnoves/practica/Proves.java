@@ -82,13 +82,19 @@ public class Proves {
                 TODO
          */
         // Factures per Empreses.
-        app.crearFacturaEmpresa(ev1.getCodi(), "EMP1", 1, 5, 10, 1, "BMN", TerminiPagament.DIARI, "+34", "ASDFG12233");
         FacturaEmpresa fe1 = ev1.facturaEmpresa(1, 5, 10, 1, "BMN", TerminiPagament.DIARI, "+34", "ASDFG12233");
         FacturaEmpresa fe2 = ev1.facturaEmpresa(2, 5, 10, 1, "REF", TerminiPagament.DIARI, "+34", "AAAAAAAAA");
         FacturaEmpresa fe3 = ev1.facturaEmpresa(1, 5, 10, 1, "TTY", TerminiPagament.DIARI, "+34", "BBBBBBBBB");
         FacturaEmpresa fe4 = ev1.facturaEmpresa(4, 5, 10, 1, "UUU", TerminiPagament.DIARI, "+34", "RRRRRRRRRRR");
         FacturaEmpresa fe5 = ev2.facturaEmpresa(3, 5, 10, 1, "III", TerminiPagament.DIARI, "+34", "TTTTTTTTTT");
         FacturaEmpresa fe6 = ev2.facturaEmpresa(1, 5, 10, 3, "OOL", TerminiPagament.DIARI, "+34", "YUUYUUUU");
+        //ficar dins empresa la factura
+        emp1.afegirFactura(fe1);
+        emp2.afegirFactura(fe2);
+        emp2.afegirFactura(fe3);
+        emp2.afegirFactura(fe4);
+        emp2.afegirFactura(fe5);
+        emp2.afegirFactura(fe6);
         // Factures per Client(importsPagats)
 
         // copiam objecte aplicacio al fitxer.
@@ -114,7 +120,7 @@ public class Proves {
             System.out.println(ex.getMessage());
         }
         try {
-            app.calcularFacturacio("EMP1");
+            System.out.println(app.calcularFacturacio("EMP1"));;
         } catch (AccioNoRealitzable ex) {
             System.out.println(ex);
         }
