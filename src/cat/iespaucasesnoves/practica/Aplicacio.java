@@ -11,18 +11,18 @@ import cat.iespaucasesnoves.persones.EmpleatGeneral;
 import cat.iespaucasesnoves.persones.EmpleatVendes;
 import cat.iespaucasesnoves.persones.Empresa;
 import cat.iespaucasesnoves.persones.Particular;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectStreamClass;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- * @author toni
- */
+
 public class Aplicacio {
 
     private HashMap<Integer, EmpleatVendes> empleatsVendes = new HashMap<>();
@@ -95,29 +95,33 @@ public class Aplicacio {
         this.juguetes = juguetes;
     }
 
-    public void crearXML() throws IOException {
-
-        FileWriter fileWriter = new FileWriter("arxiu.xml");
-
+    public File crearXML() throws IOException {
+        File arxiu = new File("arxiu.xml");
+        FileWriter fileWriter = new FileWriter(arxiu);     
+  
+        
         fileWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         fileWriter.write("<Empleats>\n");
+        
         for (EmpleatVendes empleat : empleatsVendes.values()) {
-            fileWriter.write("<EmpleatVendes>\n");
-            fileWriter.write("<identificador></identificador>");
-            fileWriter.write("<nom></nom>");
-            fileWriter.write("<dni></dni>");
-            fileWriter.write("<EmpleatVendes>\n");
+            fileWriter.write("\t<EmpleatVendes>\n");
+            fileWriter.write("\t\t<identificador>"+empleat.getIdentificador()+"</identificador>\n");
+            fileWriter.write("\t\t<nom>"+empleat.getNomComplet()+"</nom>\n");
+            fileWriter.write("\t\t<nomina>"+empleat.calcularNomina()+"</nomina>\n");
+            fileWriter.write("\t</EmpleatVendes>\n");
         }
 
-        /*for (EmpleatGeneral empleat : empleatsGenerals.values()) {
+        for (EmpleatGeneral empleat : empleatsGenerals.values()) {
             fileWriter.write("\t<EmpleatGeneral>\n");
-            fileWriter.write("\t\t<identificador>" + empleat.getIdentificador() + "</identificador>");
-            fileWriter.write("\t\t<nom>" + empleat.getNomComplet() + "</nom>");
-            fileWriter.write("\t\t<dni>" + empleat.calcularNomina() + "</dni>");
-            fileWriter.write("\t<EmpleatVendes>\n");
-        }*/
+            fileWriter.write("\t\t<identificador>" + empleat.getIdentificador() + "</identificador>\n");
+            fileWriter.write("\t\t<nom>" + empleat.getNomComplet() + "</nom>\n");
+            fileWriter.write("\t\t<dni>" + empleat.calcularNomina() + "</dni>\n");
+            fileWriter.write("\t</EmpleatVendes>\n");
+        }
         fileWriter.write("</Empleats>");
         fileWriter.close();
+        
+        return arxiu;
 
     }
 
@@ -227,13 +231,30 @@ public class Aplicacio {
 
     }
 
-    public double calcularNominaEmpleat(Empleat e) {
+    public double calcularNominaEmpleat(Empleat e) throws AccioNoRealitzable{
         if (e instanceof EmpleatVendes) {
             return ((EmpleatVendes) e).calcularNomina();
         } else if (e instanceof EmpleatGeneral) {
             return ((EmpleatVendes) e).calcularNomina();
         } else {
-            return 0;
+            throw new AccioNoRealitzable("Empleat inexistenx.");            
         }
+    }
+    
+    public void nouEmpleatVendes(){
+        
+    }
+    
+        public void nouEmpleatGeneral(){
+        
+    }
+            public void nouClientEmpresa(){
+        
+    }
+                public void nouClientParticular(){
+        
+    }
+                    public void llistarTresClientsMajorFacturacio(){
+        
     }
 }

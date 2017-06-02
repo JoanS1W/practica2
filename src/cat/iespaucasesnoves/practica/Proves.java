@@ -99,21 +99,7 @@ public class Proves {
         copiarDadesInicialsFitxer("fitxerInicial.dat", app);
         carregarDadesInicialsFitxer("fitxerInicial.dat");
         
-        /*Proves*/
-              // 4 empleats vendes.
-        EmpleatVendes ev1 = new EmpleatVendes("Miguel", "dni", "@gmail.com", "123 456 789", "carrer",
-                CategoriaEmpleat.TECNIC, 2000, 20);
-        EmpleatVendes ev2 = new EmpleatVendes("Joan", "nif", "@gmail.com", "123 456 789", "gran via",
-                CategoriaEmpleat.AUXILIAR, 1500, 10);
-        EmpleatVendes ev3 = new EmpleatVendes("Toni Xavier", "nie", "@gmail.com", "123 456 789", "carrero",
-                CategoriaEmpleat.AUXILIAR, 1500, 10);
-        EmpleatVendes ev4 = new EmpleatVendes("Pep", "dni", "@gmail.com", "123 456 789", "avenida",
-                CategoriaEmpleat.DIRECTIU, 3000, 30);
-        // afegim empleats de vendes a la app.
-        app.afegirEmpleatsVendes(ev1);
-        app.afegirEmpleatsVendes(ev2);
-        app.afegirEmpleatsVendes(ev3);
-        app.afegirEmpleatsVendes(ev4);
+        //crear xml amb l'empleat i la seva nomina.
         try {
             app.crearXML();
         } catch (IOException ex) {

@@ -1,19 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Empleats>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
-<EmpleatVendes>
-<identificador></identificador><nom></nom><dni></dni><EmpleatVendes>
+	<EmpleatVendes>
+		<identificador>dni</identificador>
+		<nom>Miguel</nom>
+		<nomina>2020.0</nomina>
+	</EmpleatVendes>
+	<EmpleatVendes>
+		<identificador>nif</identificador>
+		<nom>Joan</nom>
+		<nomina>1510.0</nomina>
+	</EmpleatVendes>
+	<EmpleatVendes>
+		<identificador>nie</identificador>
+		<nom>Toni Xavier</nom>
+		<nomina>1510.0</nomina>
+	</EmpleatVendes>
+	<EmpleatVendes>
+		<identificador>dni</identificador>
+		<nom>Pep</nom>
+		<nomina>3030.0</nomina>
+	</EmpleatVendes>
+	<EmpleatGeneral>
+		<identificador>dni</identificador>
+		<nom>M.A</nom>
+		<dni>3000.0</dni>
+	</EmpleatVendes>
+	<EmpleatGeneral>
+		<identificador>nif</identificador>
+		<nom>J.S</nom>
+		<dni>2000.0</dni>
+	</EmpleatVendes>
+	<EmpleatGeneral>
+		<identificador>nie</identificador>
+		<nom>T.X</nom>
+		<dni>1000.0</dni>
+	</EmpleatVendes>
 </Empleats>
