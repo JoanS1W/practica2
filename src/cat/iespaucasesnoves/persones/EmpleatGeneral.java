@@ -31,8 +31,8 @@ public class EmpleatGeneral extends Empleat {
     public double getPreuHora() {
         return preuHora;
     }
-    
-        /*metodes per crear i gestionar factura per l'empleat general*/
+
+    /*metodes per crear i gestionar factura per l'empleat general*/
     public FacturaParticular facturaParticular(int producte, int quantitat, double preuUnitari, int descompte, double importPagar) {
 
         FacturaParticular novaFactura = new FacturaParticular(producte, quantitat, preuUnitari, descompte);
@@ -40,11 +40,4 @@ public class EmpleatGeneral extends Empleat {
         return novaFactura;
 
     }
-
-    public void afegirLiniaFacturaParticular(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
-
-        //TODO afegir linia?
-        
-    }
-
 }

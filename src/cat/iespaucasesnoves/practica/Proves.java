@@ -3,14 +3,8 @@ package cat.iespaucasesnoves.practica;
 import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
 import cat.iespaucasesnoves.facturacio.*;
 import cat.iespaucasesnoves.persones.*;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Year;
-//import cat.iespaucasesnoves.coses.ObjectStream;
-
+import cat.iespaucasesnoves.swpro.streams.auxiliar.EinesObjectesStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -92,9 +86,7 @@ public class Proves {
         // Factures per Client(importsPagats)
 
         // copiam objecte aplicacio al fitxer.
-        //ObjectStream.escriuObjecte(uri, app);
-        
-
+        EinesObjectesStream.escriuObjecte(uri, app);
     }
 
     public static void carregarDadesInicialsFitxer(String uri) {
