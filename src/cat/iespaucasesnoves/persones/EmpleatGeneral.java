@@ -1,7 +1,6 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
-import cat.iespaucasesnoves.facturacio.FacturaParticular;
+import cat.iespaucasesnoves.facturacio.Factura;
 
 /**
  *
@@ -33,12 +32,11 @@ public class EmpleatGeneral extends Empleat {
     }
 
     /*metodes per crear i gestionar factura per l'empleat general*/
-    public FacturaParticular facturaParticular(int producte, int quantitat, double preuUnitari, int descompte) {
-
-        FacturaParticular novaFactura = new FacturaParticular(producte, quantitat, preuUnitari, descompte);
-        /*retornam factura per tal d'associar-la al client*/
+    public Factura crearFacturaParticular(int producte, int quantitat, double preuUnitari, double descompte){
+        //cream factura
+        Factura novaFactura = new Factura(producte, quantitat, preuUnitari, descompte);
+        //retornam factura per tal de guardar-la dins l'empresa*/
         return novaFactura;
-
     }
     
 }

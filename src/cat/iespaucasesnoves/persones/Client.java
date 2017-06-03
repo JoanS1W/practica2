@@ -13,7 +13,7 @@ public abstract class Client implements Serializable {
     String identificador;
     String nom;
 
-    public Client(String identificador, String nom) {
+    public Client(String nom ,String identificador) {
         this.identificador = identificador;
         this.nom = nom;
     }    

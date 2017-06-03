@@ -7,18 +7,17 @@ import static java.time.LocalDate.now;
 import java.util.ArrayList;
 
 /**
- * Aquesta sera una clase abstracta, definidora de les diferents tipos de
- * factura que tendrem al sistema.
+ * Clase per factures a la aplicacio
  *
  * @author alumnes
  * @version 1 *
  */
-public abstract class Factura implements Serializable{
+public class Factura implements Serializable{
 
     private ArrayList<Integer> productes;
     private ArrayList<Integer> quantitats;
     private ArrayList<Double> preuUnitaris;
-    private int descompte;
+    private double descompte;
     private LocalDate data;
     private boolean pagada;
     private double total;
@@ -41,7 +40,7 @@ public abstract class Factura implements Serializable{
      * @param data de creacio de la factura.
      * @param descompte de la jugueta
      */
-    public Factura(int producte, int quantitat, double preuUnitari, int descompte) {
+    public Factura(int producte, int quantitat, double preuUnitari, double descompte) {
         productes = new ArrayList<>();
         quantitats = new ArrayList<>();
         preuUnitaris = new ArrayList<>();
@@ -52,7 +51,7 @@ public abstract class Factura implements Serializable{
         this.descompte = descompte;
         this.data = now();
         this.pagada = false;
-        this.total= quantitat*preuUnitari;
+        this.total= (quantitat*preuUnitari)-(quantitat*preuUnitari)*(descompte/100);
 
         codiFactura = numeroFactura;
         numeroFactura++;
@@ -72,7 +71,7 @@ public abstract class Factura implements Serializable{
         return preuUnitaris;
     }
 
-    public int getDescompte() {
+    public double getDescompte() {
         return descompte;
     }
 
@@ -142,7 +141,7 @@ public abstract class Factura implements Serializable{
 
     @Override
     public String toString() {
-        return "Factura{" + "productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + ", codiFactura=" + codiFactura + '}';
+        return "Factura { codiFactura=" + codiFactura + ", productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + '}';
     }
     
     

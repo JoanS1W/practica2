@@ -1,6 +1,5 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.facturacio.FacturaParticular;
 import java.util.ArrayList;
 
 /**
@@ -11,7 +10,7 @@ public class Particular extends Client {
 
     private ArrayList<Double> importsPagats;
 
-    public Particular(String identificador, String nom) {
+    public Particular(String nom, String identificador) {
         super(identificador, nom);
         this.importsPagats = new ArrayList<>();
     }
