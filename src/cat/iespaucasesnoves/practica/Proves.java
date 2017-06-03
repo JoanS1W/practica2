@@ -1,6 +1,6 @@
 package cat.iespaucasesnoves.practica;
 
-import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
+import cat.iespaucasesnoves.excepcions.*;
 import cat.iespaucasesnoves.facturacio.*;
 import cat.iespaucasesnoves.persones.*;
 import cat.iespaucasesnoves.swpro.streams.auxiliar.EinesObjectesStream;
@@ -129,7 +129,10 @@ public class Proves {
             System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFactura(1, "EMP1", 28, 10, 5, 15));
         } catch (AccioNoRealitzable ex) {
             System.out.println("ERROR: "+ex.getMessage());
+        }catch (ExcepcioPagada exp) {
+            System.out.println("ERROR: "+exp.getMessage());
         }
+        
 ////         try {
 ////            app.nouEmpleatVendes("Tofol", "7596584G", "@gmail.com", "123 456 789", "carrer",
 ////                    CategoriaEmpleat.TECNIC, 2000, 20);

@@ -113,56 +113,8 @@ public class Aplicacio implements Serializable {
 
     }
 
-    /* metodes per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio, com es que he fet a crearFacturaParticular
-//    public void crearFacturaEmpresa(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
-//            int descompte, String banc, TerminiPagament pagament, String codiPais, String numCompte)
-//            throws AccioNoRealitzable {
-//
-//        /*
-//		 * L'empleat és de VENDES i el client a qui li volem fer la factura és
-//		 * una EMPRESA?
-//         */
-//        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(identificadorClient)) {
-//            /* cream la factura amb IBAN */
-//            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
-//            FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte,
-//                    banc, pagament, codiPais, numCompte);
-//            // associam la factura al client.
-//            Empresa empresa = empreses.get(identificadorClient);
-//            empresa.afegirFactura(facturaNova);
-//        } else if (!empleatsVendes.containsKey(codiEmpleat)) {
-//            throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
-//        } else {
-//            throw new AccioNoRealitzable("Aquest client no disposa d'aquest format de factura.");
-//        }
-//
-//    }
-//
-//    public void crearFacturaEmpresa(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
-//            int descompte, String banc, TerminiPagament pagament, String numTargeta, Month mesCaducitat,
-//            Year anyCaducitat) throws AccioNoRealitzable {
-//
-//        /*
-//		 * L'empleat és de VENDES i el client a qui li volem fer la factura és
-//		 * una EMPRESA?
-//         */
-//        if (empleatsVendes.containsKey(codiEmpleat) && empreses.containsKey(identificadorClient)) {
-//            /* cream la factura amb TARGETA */
-//            EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
-//            FacturaEmpresa facturaNova = empleat.facturaEmpresa(producte, quantitat, preuUnitari, descompte, banc,
-//                    pagament, numTargeta, mesCaducitat, anyCaducitat);
-//            // associam la factura al client.
-//            Empresa empresa = empreses.get(identificadorClient);
-//            empresa.afegirFactura(facturaNova);
-//        } else if (!empleatsVendes.containsKey(codiEmpleat)) {
-//            throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
-//        } else {
-//            throw new AccioNoRealitzable("Aquest client no disposa d'aquest format de factura.");
-//        }
-//
-//    }
+    /* metode per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio.
 
-    //proves noves
     public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
             double descompte) throws AccioNoRealitzable, ExcepcioPagada{
         //Cercam el client a qui li volem fer la factura i l'empleat que l'executa.
@@ -200,6 +152,14 @@ public class Aplicacio implements Serializable {
             // productes, sino retorna excepcio que tractarem a Proves.
             empleat.afegirLiniaFacturaEmpresa(codiFactura, producte, quantitat, preuUnitari);
         }
+        
+        if (empleatsVendes.containsKey(codiEmpleat)) {
+            throw new AccioNoRealitzable("No tens permisos per realitzar l'accio. ");                
+            } else {
+            throw new AccioNoRealitzable("Producte inexistent. ");
+            }
+        
+            
     }
 
     public void modificaFacturaEmpresa(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat,
@@ -216,26 +176,7 @@ public class Aplicacio implements Serializable {
         }
     }
 
-//    public String crearFacturaParticular(int codiEmpleat, String indetificadorClient, int producte, int quantitat, double preuUnitari,
-//            int descompte) throws AccioNoRealitzable {
-//
-//        /*
-//		 * L'empleat és GENERAL i el client a qui li volem fer la factura és
-//		 * un PARTICULAR?
-//         */
-//        if (empleatsGenerals.containsKey(codiEmpleat) && particulars.containsKey(indetificadorClient)) {
-//            /* cream la factura amb TARGETA */
-//            EmpleatGeneral empleat = empleatsGenerals.get(codiEmpleat);
-//            FacturaParticular facturaNova = empleat.facturaParticular(producte, quantitat, preuUnitari, descompte);
-//            // associam el que ha pagat al client, per tal de poder tenir una facturacio total a la nostra aplicacio.
-//            particulars.get(indetificadorClient).afegirImport(facturaNova.getImportPagat());
-//        } else if (!empleatsGenerals.containsKey(codiEmpleat)) {
-//            throw new AccioNoRealitzable("Empleat sense capacitat de realitzar la factura");
-//        } else {
-//            throw new AccioNoRealitzable("Aquest client no disposa d'aquest format de factura.");
-//        }
-//        return "Factura executada correctament.";
-//    }
+
 
     public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzable {
         Empleat empleat = cercarEmpleat(codiEmpleat);
