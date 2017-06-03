@@ -155,14 +155,6 @@ public class Proves {
 //            System.out.println("ERROR: "+ex.getMessage());
 //        }
 //        
-        //crear factura a empresa i a particular correcte, els errors tambe surten correctament
-//        try {
-//            
-//        app.crearFactura(1, "EMP2", 2, 10, 5, 5);
-//        app.crearFactura(5, "PAR1", 2, 10, 5, 5);
-//        } catch (AccioNoRealitzable e) {
-//            System.out.println(e.getMessage());
-//        }
         //Llistar empreses i particulars
         System.out.println("*******Llistar empreses i particulars dels que disposam ***********");
         ArrayList<Empresa> llistaEmpreses = app.getEmpreses();
