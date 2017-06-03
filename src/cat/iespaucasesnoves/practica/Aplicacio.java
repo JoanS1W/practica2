@@ -1,8 +1,8 @@
 package cat.iespaucasesnoves.practica;
 
-import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
-import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
-import cat.iespaucasesnoves.excepcions.ValorNegatiu;
+import cat.iespaucasesnoves.excepcions.AccioNoRealitzableException;
+import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
+import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import cat.iespaucasesnoves.facturacio.Factura;
 import cat.iespaucasesnoves.facturacio.Jugueta;
 import cat.iespaucasesnoves.persones.*;
@@ -116,7 +116,7 @@ public class Aplicacio implements Serializable {
 
     /* metode per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio.
     public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
-            double descompte) throws AccioNoRealitzable, ExcepcioPagada {
+            double descompte) throws AccioNoRealitzableException, ExcepcioPagadaException {
         //Cercam el client a qui li volem fer la factura i l'empleat que l'executa.
         Client client = cercarClient(identificadorClient);
         Empleat empleat = cercarEmpleat(codiEmpleat);
@@ -136,12 +136,12 @@ public class Aplicacio implements Serializable {
             ticketParticular.setPagada(true);
             return ticketParticular;
         } else {
-            throw new AccioNoRealitzable("No s'ha pogut realitzar la factura.");
+            throw new AccioNoRealitzableException("No s'ha pogut realitzar la factura.");
         }
     }
 
     public void afegirProducteFacturaEmpresa(int codiEmpleat, int codiFactura, int producte, int quantitat,
-            double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+            double preuUnitari) throws ExcepcioPagadaException, AccioNoRealitzableException {
         /*
 		 * L'empleat és de VENDES, el client és una EMPRESA i la JUGUETA
 		 * existeix al nostre sistema?
@@ -154,15 +154,15 @@ public class Aplicacio implements Serializable {
         }
 
         if (empleatsVendes.containsKey(codiEmpleat)) {
-            throw new AccioNoRealitzable("No tens permisos per realitzar l'accio. ");
+            throw new AccioNoRealitzableException("No tens permisos per realitzar l'accio. ");
         } else {
-            throw new AccioNoRealitzable("Producte inexistent. ");
+            throw new AccioNoRealitzableException("Producte inexistent. ");
         }
 
     }
 
     public void modificaFacturaEmpresa(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat,
-            double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+            double preuUnitari) throws ExcepcioPagadaException, AccioNoRealitzableException {
         /*
 		 * L'empleat és de VENDES, el client és una EMPRESA i la JUGUETA
 		 * existeix al nostre sistema?
@@ -175,45 +175,45 @@ public class Aplicacio implements Serializable {
         }
     }
 
-    public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzable {
+    public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzableException {
         Empleat empleat = cercarEmpleat(codiEmpleat);
         if (empleat != null) {
             return empleat.calcularNomina();
         } else {
-            throw new AccioNoRealitzable("Empleat inexistenx.");
+            throw new AccioNoRealitzableException("Empleat inexistenx.");
         }
     }
 
     //NOUS EMPLEATS JA FUNCIONEN
-    public void nouEmpleatVendes(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double comissio) throws AccioNoRealitzable {
+    public void nouEmpleatVendes(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double comissio) throws AccioNoRealitzableException {
         EmpleatVendes empleat = new EmpleatVendes(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, comissio);
         for (Empleat emp : empleatsVendes.values()) {
             if (emp.equals(empleat)) {
                 empleat = null;
-                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+                throw new AccioNoRealitzableException("Ja existeix aquest empleat.");
             }
         }
         for (Empleat emp : empleatsGenerals.values()) {
             if (emp.equals(empleat)) {
                 empleat = null;
-                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+                throw new AccioNoRealitzableException("Ja existeix aquest empleat.");
             }
         }
         empleatsVendes.put(empleat.getCodi(), empleat);
     }
 
-    public void nouEmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora) throws AccioNoRealitzable {
+    public void nouEmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora) throws AccioNoRealitzableException {
         EmpleatGeneral empleat = new EmpleatGeneral(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, horesExtres, preuHora);
         for (Empleat emp : empleatsGenerals.values()) {
             if (emp.equals(empleat)) {
                 empleat = null;
-                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+                throw new AccioNoRealitzableException("Ja existeix aquest empleat.");
             }
         }
         for (Empleat emp : empleatsVendes.values()) {
             if (emp.equals(empleat)) {
                 empleat = null;
-                throw new AccioNoRealitzable("Ja existeix aquest empleat.");
+                throw new AccioNoRealitzableException("Ja existeix aquest empleat.");
             }
         }
         empleatsGenerals.put(empleat.getCodi(), empleat);
@@ -231,26 +231,26 @@ public class Aplicacio implements Serializable {
 
     }
 
-    public ArrayList<Client> llistaFacturacioParametritzada(int limit) throws ValorNegatiu {
+    public ArrayList<Client> llistaFacturacioParametritzada(int limit) throws ValorNegatiuException {
         ArrayList<Client> llista = new ArrayList<>();
         for (Empresa client : empreses.values()) {
             if (limit < 0) {
-                throw new ValorNegatiu("El limit es negatiu.");
+                throw new ValorNegatiuException("El limit es negatiu.");
             } else if (client.calcularFacturacio() > limit) {
                 llista.add(client);
             }
         }
         for (Particular client : particulars.values()) {
             if (limit < 0) {
-                throw new ValorNegatiu("El limit es negatiu.");
+                throw new ValorNegatiuException("El limit es negatiu.");
             } else if (client.calcularFacturacio() > limit) {
                 llista.add(client);
             }
+        }
+        return llista;
     }
-    return llista ;
-}
 
-public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable {
+    public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzableException {
         //cercam si exiteix un client amb aquest identificador.
         Client client = cercarClient(identificadorClient);
         if (client != null) {
@@ -262,7 +262,7 @@ public double calcularFacturacio(String identificadorClient) throws AccioNoReali
         //            return client.calcularFacturacio();
         //        } 
         else {
-            throw new AccioNoRealitzable("El client no existeix al sistema");
+            throw new AccioNoRealitzableException("El client no existeix al sistema");
         }
 
     }

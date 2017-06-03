@@ -1,5 +1,6 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import cat.iespaucasesnoves.facturacio.Factura;
 
 /**
@@ -32,11 +33,32 @@ public class EmpleatGeneral extends Empleat {
     }
 
     /*metodes per crear i gestionar factura per l'empleat general*/
-    public Factura crearFacturaParticular(int producte, int quantitat, double preuUnitari, double descompte){
+    public Factura crearFacturaParticular(int producte, int quantitat, double preuUnitari, double descompte) {
         //cream factura
         Factura novaFactura = new Factura(producte, quantitat, preuUnitari, descompte);
         //retornam factura per tal de guardar-la dins l'empresa*/
         return novaFactura;
     }
-    
+
+    public void setHoresExtres(double horesExtres) throws ValorNegatiuException {
+        if (horesExtres < 0) {
+            throw new ValorNegatiuException("El valor de les hores extra es negatiu.");
+        } else {
+            this.horesExtres = horesExtres;
+        }
+    }
+
+    public void setPreuHora(double preuHora) throws ValorNegatiuException {
+        if (preuHora < 0) {
+            throw new ValorNegatiuException("El valor del preu per hora es negatiu.");
+        } else {
+            this.preuHora = preuHora;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "EmpleatGeneral{" + "horesExtres=" + horesExtres + ", preuHora=" + preuHora + '}';
+    }
+
 }

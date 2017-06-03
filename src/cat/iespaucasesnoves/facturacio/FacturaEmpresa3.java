@@ -10,8 +10,4 @@ public class FacturaEmpresa3 extends Factura {
         super(producte, quantitat, preuUnitari, descompte);
     }
 
-
-
-
-    
 }

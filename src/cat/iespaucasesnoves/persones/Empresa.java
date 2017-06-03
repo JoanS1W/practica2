@@ -1,5 +1,6 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.excepcions.AccioNoRealitzableException;
 import cat.iespaucasesnoves.facturacio.Factura;
 import cat.iespaucasesnoves.facturacio.TerminiPagament;
 import java.util.ArrayList;
@@ -11,18 +12,18 @@ import java.util.HashMap;
  */
 public class Empresa extends Client {
 
-	private HashMap<Integer, Factura> factures;
-        private TerminiPagament metodePagament;
-        private String formaPagament;//iban o targeta
-        private String banc;
-        //IBAN
-        private String iban;
-        //TAGRETA
-        private String numTarg;
-        private int any;
-        private int mes;
+    private HashMap<Integer, Factura> factures;
+    private TerminiPagament metodePagament;
+    private String formaPagament;//iban o targeta
+    private String banc;
+    //IBAN
+    private String iban;
+    //TAGRETA
+    private String numTarg;
+    private int any;
+    private int mes;
 
-     //constructor per crear empresa amb pagament IBAN.
+    //constructor per crear empresa amb pagament IBAN.
     public Empresa(String nom, String identificadorEmpresa, TerminiPagament metodePagament, String formaPagament, String banc, String iban) {
         super(identificadorEmpresa, nom);
         this.metodePagament = metodePagament;
@@ -44,28 +45,39 @@ public class Empresa extends Client {
         this.mes = mes;
         factures = new HashMap<>();
     }
-    
-    
-        @Override
-	public double calcularFacturacio() {
-		double totalFacturat = 0;
-		for (Factura factura : factures.values()) {
-			totalFacturat = totalFacturat + factura.getTotal();
-		}
-		return totalFacturat;
-	}
 
-	public ArrayList<Factura> getFactures() {
-		ArrayList<Factura> copia = new ArrayList<>();
-		for (Factura factura : factures.values()) {
-			copia.add(factura);
-		}
-		return copia;
-	}
+    @Override
+    public double calcularFacturacio() {
+        double totalFacturat = 0;
+        for (Factura factura : factures.values()) {
+            totalFacturat = totalFacturat + factura.getTotal();
+        }
+        return totalFacturat;
+    }
 
-	public void afegirFactura(Factura fe) {
-		factures.put(fe.getCodiFactura(), fe);
-	}
+    public ArrayList<Factura> getFactures() {
+        ArrayList<Factura> copia = new ArrayList<>();
+        for (Factura factura : factures.values()) {
+            copia.add(factura);
+        }
+        return copia;
+    }
+
+    public void afegirFactura(Factura fe) {
+        factures.put(fe.getCodiFactura(), fe);
+    }
+
+    public void setFormaPagament(String formaPagament) throws AccioNoRealitzableException {
+        if (!"iban".equals(formaPagament) || !"targeta".equals(formaPagament)) {
+            throw new AccioNoRealitzableException("La forma de pagament només pot ser targeta o iban.");
+        } else {
+            this.formaPagament = formaPagament;
+        }
+    }
+
+    public void setBanc(String banc) {
+        this.banc = banc;
+    }
 
     @Override
     public String toString() {
@@ -99,8 +111,5 @@ public class Empresa extends Client {
     public int getMes() {
         return mes;
     }
-    
-    
 
-        
 }

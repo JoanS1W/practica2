@@ -1,6 +1,6 @@
 package cat.iespaucasesnoves.facturacio;
 
-import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
 
 public class FacturaParticular3 {
 
@@ -24,5 +24,4 @@ public class FacturaParticular3 {
 //        }
 //
 //    }
-
 }

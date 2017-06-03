@@ -15,7 +15,7 @@ public class Proves {
 
     /* metode on cream dades y guardam objecte Aplicacio dins fitxer */
     public static void copiarDadesInicialsFitxer(String uri) {
-        
+
         Aplicacio app = new Aplicacio();
         // 4 empleats vendes.
         EmpleatVendes ev1 = new EmpleatVendes("Miguel", "dni", "@gmail.com", "123 456 789", "carrer",
@@ -44,12 +44,11 @@ public class Proves {
         app.afegirEmpleatsGenerals(eg7);
         /* TODO */
         // Empreses.
-        Empresa emp1 = new Empresa("EMP1", "Empresa1", TerminiPagament.MENSUAL, "IBAN", "la caixa", "213453456FF" );
-        Empresa emp2 = new Empresa("EMP2", "Empresa2", TerminiPagament.SEMANAL, "IBAN", "la caixa", "213453456FF" );
-        Empresa emp3 = new Empresa("EMP3", "Empresa3", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF" );
-        Empresa emp4 = new Empresa("EMP4", "Empresa4", TerminiPagament.MENSUAL, "TARGETA", "la caixa", "98989898", 2018, 1 );
-        Empresa emp5 = new Empresa("EMP5", "Empresa5", TerminiPagament.MENSUAL, "TARGETA", "sa nostra", "00000000", 2019, 5 );
-
+        Empresa emp1 = new Empresa("EMP1", "Empresa1", TerminiPagament.MENSUAL, "IBAN", "la caixa", "213453456FF");
+        Empresa emp2 = new Empresa("EMP2", "Empresa2", TerminiPagament.SEMANAL, "IBAN", "la caixa", "213453456FF");
+        Empresa emp3 = new Empresa("EMP3", "Empresa3", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
+        Empresa emp4 = new Empresa("EMP4", "Empresa4", TerminiPagament.MENSUAL, "TARGETA", "la caixa", "98989898", 2018, 1);
+        Empresa emp5 = new Empresa("EMP5", "Empresa5", TerminiPagament.MENSUAL, "TARGETA", "sa nostra", "00000000", 2019, 5);
 
         app.afegirEmpreses(emp1);
         app.afegirEmpreses(emp2);
@@ -76,7 +75,7 @@ public class Proves {
         app.afegirJuguetes(jug3);
         app.afegirJuguetes(jug4);
         app.afegirJuguetes(jug5);
- 
+
         // Factures per Empreses.
 //        FacturaEmpresa fe1 = ev1.facturaEmpresa(1, 5, 10, 1, "+34", "ASDFG12233");
 //        FacturaEmpresa fe2 = ev1.facturaEmpresa(2, 5, 10, 1, "+34", "AAAAAAAAA");
@@ -92,26 +91,21 @@ public class Proves {
 //        emp2.afegirFactura(fe5);
 //        emp2.afegirFactura(fe6);
         // Factures per Client(importsPagats)
-
         // copiam objecte aplicacio al fitxer.
         EinesObjectesStream.escriuObjecte(uri, app);
     }
 
     public static Aplicacio carregarDadesInicialsFitxer(String uri) {
-         
-       return (Aplicacio) EinesObjectesStream.llegeixObjecte(uri);
-        
+
+        return (Aplicacio) EinesObjectesStream.llegeixObjecte(uri);
+
     }
 
     public static void main(String[] args) {
 
-        
         copiarDadesInicialsFitxer("fitxerInicial.dat");
         Aplicacio app = (Aplicacio) EinesObjectesStream.llegeixObjecte("fitxerInicial.dat");
-                
-        
-       
-        
+
         //crear xml amb l'empleat i la seva nomina.
         try {
             app.crearXml();
@@ -124,15 +118,15 @@ public class Proves {
 //            System.out.println(ex);
 //        }
         try {
-            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : "+app.calcularNominaEmpleat(5));
-            System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFactura(5, "PAR1", 2, 10, 5, 5));
-            System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFactura(1, "EMP1", 28, 10, 5, 15));
-        } catch (AccioNoRealitzable ex) {
-            System.out.println("ERROR: "+ex.getMessage());
-        }catch (ExcepcioPagada exp) {
-            System.out.println("ERROR: "+exp.getMessage());
+            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : " + app.calcularNominaEmpleat(5));
+            System.out.println("2) Crear Factura per un particular que paga al moment : " + app.crearFactura(5, "PAR1", 2, 10, 5, 5));
+            System.out.println("2) Crear Factura per un particular que paga al moment : " + app.crearFactura(1, "EMP1", 28, 10, 5, 15));
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        } catch (ExcepcioPagadaException exp) {
+            System.out.println("ERROR: " + exp.getMessage());
         }
-        
+
 ////         try {
 ////            app.nouEmpleatVendes("Tofol", "7596584G", "@gmail.com", "123 456 789", "carrer",
 ////                    CategoriaEmpleat.TECNIC, 2000, 20);
@@ -165,13 +159,13 @@ public class Proves {
         for (Particular particular : llistaParticulars) {
             System.out.println(particular);
         }
-        
+
         try {
             System.out.println(app.llistaFacturacioParametritzada(5));
-        } catch (ValorNegatiu vn) {
-            System.out.println("ERROR: "+vn.getMessage());
+        } catch (ValorNegatiuException vn) {
+            System.out.println("ERROR: " + vn.getMessage());
         }
-            
+
     }
 
 }

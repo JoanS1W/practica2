@@ -1,12 +1,13 @@
 package cat.iespaucasesnoves.persones;
 
+import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import java.io.Serializable;
 
 /**
  *
  * @author alumne
  */
-public abstract class Empleat implements Serializable{
+public abstract class Empleat implements Serializable {
 
     private static int numeroEmpleat = 1;
     private final int codi;
@@ -90,8 +91,12 @@ public abstract class Empleat implements Serializable{
         this.categoria = categoria;
     }
 
-    public void setSalariBase(double salariBase) {
-        this.salariBase = salariBase;
+    public void setSalariBase(double salariBase) throws ValorNegatiuException {
+        if (salariBase < 0) {
+            throw new ValorNegatiuException("El valor del salari base es negatiu.");
+        } else {
+            this.salariBase = salariBase;
+        }
     }
 
     @Override
@@ -99,5 +104,4 @@ public abstract class Empleat implements Serializable{
         return "Empleat{" + "codi=" + codi + ", nomComplet=" + nomComplet + ", identificador=" + identificador + ", email=" + email + ", telefon=" + telefon + ", direccio=" + direccio + ", categoria=" + categoria + ", salariBase=" + salariBase + '}';
     }
 
-    
 }

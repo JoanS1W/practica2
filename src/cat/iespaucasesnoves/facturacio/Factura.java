@@ -1,10 +1,11 @@
 package cat.iespaucasesnoves.facturacio;
 
-import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import static java.time.LocalDate.now;
 import java.util.ArrayList;
+import static java.time.LocalDate.now;
 
 /**
  * Clase per factures a la aplicacio
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  * @author alumnes
  * @version 1 *
  */
-public class Factura implements Serializable{
+public class Factura implements Serializable {
 
     private ArrayList<Integer> productes;
     private ArrayList<Integer> quantitats;
@@ -51,7 +52,7 @@ public class Factura implements Serializable{
         this.descompte = descompte;
         this.data = now();
         this.pagada = false;
-        this.total= (quantitat*preuUnitari)-(quantitat*preuUnitari)*(descompte/100);
+        this.total = (quantitat * preuUnitari) - (quantitat * preuUnitari) * (descompte / 100);
 
         codiFactura = numeroFactura;
         numeroFactura++;
@@ -94,10 +95,10 @@ public class Factura implements Serializable{
     /*setters amb condicio de que la factura no estigui pagada que amollara excepcio*/
 
  /*Aquest setter ens deixara modificar una linia sencera de la factura.*/
-    public void modificarLiniaFactura(int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
+    public void modificarLiniaFactura(int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagadaException {
 
         if (pagada) {
-            throw new ExcepcioPagada("Factura PAGADA no modificable");
+            throw new ExcepcioPagadaException("Factura PAGADA no modificable");
         } else {
             int oldQuantitat = quantitats.get(numeroLinia);
             double oldPreuUnitari = preuUnitaris.get(numeroLinia);
@@ -109,28 +110,28 @@ public class Factura implements Serializable{
         }
     }
 
-    public void setDescompte(int descompte) throws ExcepcioPagada {
+    public void setDescompte(int descompte) throws ExcepcioPagadaException {
 
         if (pagada) {
-            throw new ExcepcioPagada("Factura PAGADA no modificable");
+            throw new ExcepcioPagadaException("Factura PAGADA no modificable");
         } else {
             this.descompte = descompte;
         }
     }
 
-    public void setPagada(boolean pagat) throws ExcepcioPagada {
+    public void setPagada(boolean pagat) throws ExcepcioPagadaException {
 
         if (pagada) {
-            throw new ExcepcioPagada("Factura PAGADA no modificable");
+            throw new ExcepcioPagadaException("Factura PAGADA no modificable");
         } else {
             this.pagada = pagat;
         }
     }
 
-    public void afegirLiniaFactura(int producte, int quantitat, double preuUnitari) throws ExcepcioPagada {
+    public void afegirLiniaFactura(int producte, int quantitat, double preuUnitari) throws ExcepcioPagadaException {
 
         if (pagada) {
-            throw new ExcepcioPagada("Factura PAGADA no modificable");
+            throw new ExcepcioPagadaException("Factura PAGADA no modificable");
         } else {
             productes.add(producte);
             quantitats.add(quantitat);
@@ -143,6 +144,5 @@ public class Factura implements Serializable{
     public String toString() {
         return "Factura { codiFactura=" + codiFactura + ", productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + '}';
     }
-    
-    
+
 }

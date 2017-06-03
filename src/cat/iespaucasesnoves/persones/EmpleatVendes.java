@@ -1,7 +1,8 @@
 package cat.iespaucasesnoves.persones;
 
-import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
-import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import cat.iespaucasesnoves.excepcions.AccioNoRealitzableException;
+import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
+import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import cat.iespaucasesnoves.facturacio.Factura;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,8 +43,7 @@ public class EmpleatVendes extends Empleat {
     }
 
     /*metodes per crear i gestionar factura per l'empleat*/
-    
-    public Factura crearFacturaEmpresa(int producte, int quantitat, double preuUnitari, double descompte){
+    public Factura crearFacturaEmpresa(int producte, int quantitat, double preuUnitari, double descompte) {
         //cream factura
         Factura novaFactura = new Factura(producte, quantitat, preuUnitari, descompte);
         //ficam dins la llista de vendes de l'empleat
@@ -71,30 +71,40 @@ public class EmpleatVendes extends Empleat {
 //        /*retornam factura per tal de guardar-la dins el client*/
 //        return novaFactura;
 //    }
-
-    public void afegirLiniaFacturaEmpresa(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+    public void afegirLiniaFacturaEmpresa(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagadaException, AccioNoRealitzableException {
 
         if (vendes.containsKey(codiFactura)) {
             Factura factura = vendes.get(codiFactura);
             //aquest metode torna excepcio de factura no pagada que propagam fins que les tractem totes al main.
             factura.afegirLiniaFactura(producte, quantitat, preuUnitari);
         } else {
-            throw new AccioNoRealitzable("Factura no disponible.");
+            throw new AccioNoRealitzableException("Factura no disponible.");
         }
 
     }
 
-    public void modificarLiniaFacturaEmpresa(int codiFactura, int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
+    public void modificarLiniaFacturaEmpresa(int codiFactura, int numeroLinia, int producte, int quantitat, double preuUnitari) throws ExcepcioPagadaException, AccioNoRealitzableException {
 
         if (vendes.containsKey(codiFactura)) {
             Factura factura = vendes.get(codiFactura);
             //aquest metode torna excepcio de factura no pagada que propagam fins que les tractem totes al main.
             factura.modificarLiniaFactura(numeroLinia, producte, quantitat, preuUnitari);
         } else {
-            throw new AccioNoRealitzable("Factura no disponible.");
+            throw new AccioNoRealitzableException("Factura no disponible.");
         }
     }
-    
-    
+
+    public void setComissio(double comissio) throws ValorNegatiuException {
+        if (comissio < 0) {
+            throw new ValorNegatiuException("El valor de la comissio es negatiu.");
+        } else {
+            this.comissio = comissio;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "EmpleatVendes{" + "comissio=" + comissio + ", vendes=" + vendes + '}';
+    }
     
 }
