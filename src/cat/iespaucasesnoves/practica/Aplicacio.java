@@ -227,8 +227,45 @@ public class Aplicacio implements Serializable {
 
     }
 
-    public void llistarMajorFacturacio() {
-
+    public ArrayList<Client> llistarMajorFacturacio() {
+        ArrayList<Client> llista = new ArrayList<>();
+        ArrayList<Client> tots = new ArrayList<>();
+        Client major1;
+        Client major2;
+        Client major3;
+        Client auxCl = null;
+        double aux = 0;
+        for (Empresa client : empreses.values()) {
+            tots.add(client);
+        }
+        for (Particular client : particulars.values()) {
+            tots.add(client);
+        }
+        for (Client client : tots) {
+            if (aux < client.calcularFacturacio()) {
+                aux = client.calcularFacturacio();
+                auxCl = client;
+            }
+        }
+        major1 = auxCl;
+        for (Client client : tots) {
+            if (aux < client.calcularFacturacio() && client.calcularFacturacio() != major1.calcularFacturacio()) {
+                aux = client.calcularFacturacio();
+                auxCl = client;
+            }
+        }
+        major2 = auxCl;
+        for (Client client : tots) {
+            if (aux < client.calcularFacturacio() && client.calcularFacturacio() != major2.calcularFacturacio() && client.calcularFacturacio() != major1.calcularFacturacio()) {
+                aux = client.calcularFacturacio();
+                auxCl = client;
+            }
+        }
+        major3 = auxCl;
+        llista.add(major1);
+        llista.add(major2);
+        llista.add(major3);
+        return llista;
     }
 
     public ArrayList<Client> llistaFacturacioParametritzada(int limit) throws ValorNegatiuException {
