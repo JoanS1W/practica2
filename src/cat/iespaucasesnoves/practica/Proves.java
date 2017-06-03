@@ -165,7 +165,12 @@ public class Proves {
         for (Particular particular : llistaParticulars) {
             System.out.println(particular);
         }
-
+        
+        try {
+            System.out.println(app.llistaFacturacioParametritzada(5));
+        } catch (ValorNegatiu vn) {
+            System.out.println("ERROR: "+vn.getMessage());
+        }
             
     }
 

@@ -234,17 +234,17 @@ public class Aplicacio implements Serializable {
     public ArrayList<Client> llistaFacturacioParametritzada(int limit) throws ValorNegatiu {
         ArrayList<Client> llista = new ArrayList<>();
         for (Empresa client : empreses.values()) {
-            if (client.calcularFacturacio() > limit) {
-                llista.add(client);
-            } else if (limit < 0) {
+            if (limit < 0) {
                 throw new ValorNegatiu("El limit es negatiu.");
+            } else if (client.calcularFacturacio() > limit) {
+                llista.add(client);
             }
         }
         for (Particular client : particulars.values()) {
-            if (client.calcularFacturacio() > limit) {
-                llista.add(client);
-            } else if (limit < 0) {
+            if (limit < 0) {
                 throw new ValorNegatiu("El limit es negatiu.");
+            } else if (client.calcularFacturacio() > limit) {
+                llista.add(client);
             }
     }
     return llista ;
