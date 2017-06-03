@@ -2,6 +2,7 @@ package cat.iespaucasesnoves.practica;
 
 import cat.iespaucasesnoves.excepcions.AccioNoRealitzable;
 import cat.iespaucasesnoves.excepcions.ExcepcioPagada;
+import cat.iespaucasesnoves.excepcions.ValorNegatiu;
 import cat.iespaucasesnoves.facturacio.Factura;
 import cat.iespaucasesnoves.facturacio.Jugueta;
 import cat.iespaucasesnoves.persones.*;
@@ -114,32 +115,31 @@ public class Aplicacio implements Serializable {
     }
 
     /* metode per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio.
-
     public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
-            double descompte) throws AccioNoRealitzable, ExcepcioPagada{
+            double descompte) throws AccioNoRealitzable, ExcepcioPagada {
         //Cercam el client a qui li volem fer la factura i l'empleat que l'executa.
         Client client = cercarClient(identificadorClient);
         Empleat empleat = cercarEmpleat(codiEmpleat);
-        
+
         //si es una empresa i un empleat de vendes realitzam la factura per la empresa.
         if ((client instanceof Empresa) && (empleat instanceof EmpleatVendes)) {
-            Factura facturaEmpresa = ((EmpleatVendes)empleat).crearFacturaEmpresa(producte, quantitat, preuUnitari, descompte);
+            Factura facturaEmpresa = ((EmpleatVendes) empleat).crearFacturaEmpresa(producte, quantitat, preuUnitari, descompte);
             //TODO mirar metodePagament de la empresa i si es diari posar pagada i guardarla.<-------------------------------------------------
-            ((Empresa)client).afegirFactura(facturaEmpresa);
+            ((Empresa) client).afegirFactura(facturaEmpresa);
             return facturaEmpresa;
-                       
-        }else if((client instanceof Particular) && (empleat instanceof EmpleatGeneral)) {
+
+        } else if ((client instanceof Particular) && (empleat instanceof EmpleatGeneral)) {
             //cream factura i la cobram, faria la funcio de ticket
             Factura ticketParticular = ((EmpleatGeneral) empleat).crearFacturaParticular(producte, quantitat, preuUnitari, descompte);
             //afegim el total al client per dur un recompte del que ens ha anat gastant.
             ((Particular) client).afegirImport(ticketParticular.getTotal());
             ticketParticular.setPagada(true);
             return ticketParticular;
-        }else{
+        } else {
             throw new AccioNoRealitzable("No s'ha pogut realitzar la factura.");
         }
     }
-    
+
     public void afegirProducteFacturaEmpresa(int codiEmpleat, int codiFactura, int producte, int quantitat,
             double preuUnitari) throws ExcepcioPagada, AccioNoRealitzable {
         /*
@@ -152,14 +152,13 @@ public class Aplicacio implements Serializable {
             // productes, sino retorna excepcio que tractarem a Proves.
             empleat.afegirLiniaFacturaEmpresa(codiFactura, producte, quantitat, preuUnitari);
         }
-        
+
         if (empleatsVendes.containsKey(codiEmpleat)) {
-            throw new AccioNoRealitzable("No tens permisos per realitzar l'accio. ");                
-            } else {
+            throw new AccioNoRealitzable("No tens permisos per realitzar l'accio. ");
+        } else {
             throw new AccioNoRealitzable("Producte inexistent. ");
-            }
-        
-            
+        }
+
     }
 
     public void modificaFacturaEmpresa(int codiEmpleat, int codiFactura, int linia, int producte, int quantitat,
@@ -175,8 +174,6 @@ public class Aplicacio implements Serializable {
             empleat.modificarLiniaFacturaEmpresa(codiFactura, linia, producte, quantitat, preuUnitari);
         }
     }
-
-
 
     public double calcularNominaEmpleat(int codiEmpleat) throws AccioNoRealitzable {
         Empleat empleat = cercarEmpleat(codiEmpleat);
@@ -223,7 +220,7 @@ public class Aplicacio implements Serializable {
     }
 
     public void nouClientEmpresa() {
-            
+
     }
 
     public void nouClientParticular() {
@@ -234,30 +231,44 @@ public class Aplicacio implements Serializable {
 
     }
 
-    public void llistaFacturacioParametritzada() {
-
+    public ArrayList<Client> llistaFacturacioParametritzada(int limit) throws ValorNegatiu {
+        ArrayList<Client> llista = new ArrayList<>();
+        for (Empresa client : empreses.values()) {
+            if (client.calcularFacturacio() > limit) {
+                llista.add(client);
+            } else if (limit < 0) {
+                throw new ValorNegatiu("El limit es negatiu.");
+            }
+        }
+        for (Particular client : particulars.values()) {
+            if (client.calcularFacturacio() > limit) {
+                llista.add(client);
+            } else if (limit < 0) {
+                throw new ValorNegatiu("El limit es negatiu.");
+            }
     }
+    return llista ;
+}
 
-    public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable {
+public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzable {
         //cercam si exiteix un client amb aquest identificador.
         Client client = cercarClient(identificadorClient);
         if (client != null) {
             return client.calcularFacturacio();
-        }
-//        if (client instanceof Empresa) {
-//            return client.calcularFacturacio();
-//        } else if (client instanceof Particular) {
-//
-//            return client.calcularFacturacio();
-//        } 
+        } //        if (client instanceof Empresa) {
+        //            return client.calcularFacturacio();
+        //        } else if (client instanceof Particular) {
+        //
+        //            return client.calcularFacturacio();
+        //        } 
         else {
             throw new AccioNoRealitzable("El client no existeix al sistema");
         }
 
     }
-    
-    public void cobramentDeFactures(){
-        
+
+    public void cobramentDeFactures() {
+
     }
 
     //metodes de cerca de l'objecte ja que desde la aplicacio lo normal sera executar els metodes amb els codis identificatius.

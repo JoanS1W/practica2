@@ -46,6 +46,7 @@ public class Empresa extends Client {
     }
     
     
+        @Override
 	public double calcularFacturacio() {
 		double totalFacturat = 0;
 		for (Factura factura : factures.values()) {
