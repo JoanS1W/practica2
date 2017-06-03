@@ -163,8 +163,8 @@ public class Aplicacio implements Serializable {
 //    }
 
     //proves noves
-    public void crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
-            double descompte) throws AccioNoRealitzable{
+    public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
+            double descompte) throws AccioNoRealitzable, ExcepcioPagada{
         //Cercam el client a qui li volem fer la factura i l'empleat que l'executa.
         Client client = cercarClient(identificadorClient);
         Empleat empleat = cercarEmpleat(codiEmpleat);
@@ -172,16 +172,17 @@ public class Aplicacio implements Serializable {
         //si es una empresa i un empleat de vendes realitzam la factura per la empresa.
         if ((client instanceof Empresa) && (empleat instanceof EmpleatVendes)) {
             Factura facturaEmpresa = ((EmpleatVendes)empleat).crearFacturaEmpresa(producte, quantitat, preuUnitari, descompte);
-            //TODO mirar metodePagament de la empresa i si es diari posar pagada i guardarla.
-            System.out.println(facturaEmpresa);
+            //TODO mirar metodePagament de la empresa i si es diari posar pagada i guardarla.<-------------------------------------------------
             ((Empresa)client).afegirFactura(facturaEmpresa);
+            return facturaEmpresa;
                        
         }else if((client instanceof Particular) && (empleat instanceof EmpleatGeneral)) {
             //cream factura i la cobram, faria la funcio de ticket
             Factura ticketParticular = ((EmpleatGeneral) empleat).crearFacturaParticular(producte, quantitat, preuUnitari, descompte);
             //afegim el total al client per dur un recompte del que ens ha anat gastant.
-            System.out.println(ticketParticular);
             ((Particular) client).afegirImport(ticketParticular.getTotal());
+            ticketParticular.setPagada(true);
+            return ticketParticular;
         }else{
             throw new AccioNoRealitzable("No s'ha pogut realitzar la factura.");
         }

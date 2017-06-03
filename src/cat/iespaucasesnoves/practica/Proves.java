@@ -113,21 +113,23 @@ public class Proves {
        
         
         //crear xml amb l'empleat i la seva nomina.
-//        try {
-//            app.crearXml();
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
+        try {
+            app.crearXml();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
 //        try {
 //            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : "+app.calcularNominaEmpleat(5));
 //        } catch (AccioNoRealitzable ex) {
 //            System.out.println(ex);
 //        }
-//        try {
-//            System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFacturaParticular(6, "PAR2", 2, 50, 10, 10));
-//        } catch (AccioNoRealitzable ex) {
-//            System.out.println("ERROR: "+ex.getMessage());
-//        }
+        try {
+            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : "+app.calcularNominaEmpleat(5));
+            System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFactura(5, "PAR1", 2, 10, 5, 5));
+            System.out.println("2) Crear Factura per un particular que paga al moment : "  + app.crearFactura(1, "EMP1", 28, 10, 5, 15));
+        } catch (AccioNoRealitzable ex) {
+            System.out.println("ERROR: "+ex.getMessage());
+        }
 ////         try {
 ////            app.nouEmpleatVendes("Tofol", "7596584G", "@gmail.com", "123 456 789", "carrer",
 ////                    CategoriaEmpleat.TECNIC, 2000, 20);
@@ -151,13 +153,13 @@ public class Proves {
 //        }
 //        
         //crear factura a empresa i a particular correcte, els errors tambe surten correctament
-        try {
-            
-        app.crearFactura(1, "EMP2", 2, 10, 5, 5);
-        app.crearFactura(5, "PAR1", 2, 10, 5, 5);
-        } catch (AccioNoRealitzable e) {
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            
+//        app.crearFactura(1, "EMP2", 2, 10, 5, 5);
+//        app.crearFactura(5, "PAR1", 2, 10, 5, 5);
+//        } catch (AccioNoRealitzable e) {
+//            System.out.println(e.getMessage());
+//        }
         //Llistar empreses i particulars
         System.out.println("*******Llistar empreses i particulars dels que disposam ***********");
         ArrayList<Empresa> llistaEmpreses = app.getEmpreses();
