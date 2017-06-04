@@ -39,7 +39,8 @@ public class Particular extends Client {
 
     @Override
     public String toString() {
-        return "Particular : {" + super.toString() + ", totalCompres = " + importsPagats.size() + "}";
+        return "Particular : \t{" + super.toString() + ", totalCompres = " + importsPagats.size() + ", facturacio = "+ calcularFacturacio() +" Euros }";
     }
+
 
 }

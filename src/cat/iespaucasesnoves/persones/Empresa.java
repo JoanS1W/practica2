@@ -3,6 +3,7 @@ package cat.iespaucasesnoves.persones;
 import cat.iespaucasesnoves.excepcions.AccioNoRealitzableException;
 import cat.iespaucasesnoves.facturacio.Factura;
 import cat.iespaucasesnoves.facturacio.TerminiPagament;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -55,6 +56,19 @@ public class Empresa extends Client {
         return totalFacturat;
     }
 
+    public double calcularFacturacioMensual() {
+        double totalFacturat = 0;
+        LocalDate dataActual = LocalDate.now();//2017-6-02
+        int mesActual = dataActual.getMonthValue();
+        int anyActual = dataActual.getYear();
+        for (Factura factura : factures.values()) {
+            if (factura.getData().getMonthValue() == mesActual && factura.getData().getYear() == anyActual) {
+                totalFacturat = totalFacturat + factura.getTotal();
+            }
+        }
+        return totalFacturat;
+    }
+
     public ArrayList<Factura> getFactures() {
         ArrayList<Factura> copia = new ArrayList<>();
         for (Factura factura : factures.values()) {
@@ -81,7 +95,7 @@ public class Empresa extends Client {
 
     @Override
     public String toString() {
-        return "Empresa : {" + super.toString() + ", totalFactures = " + factures.size() + "}";
+        return "Empresa : \t{" + super.toString() + ", totalFactures = " + factures.size() + ", facturacio = " + calcularFacturacio() + " Euros }";
     }
 
     public TerminiPagament getMetodePagament() {

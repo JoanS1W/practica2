@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author alumne
  */
-public abstract class Client implements Serializable {
+public abstract class Client implements Serializable, Comparable<Client> {
 
     String identificador;
     String nom;
@@ -40,6 +40,15 @@ public abstract class Client implements Serializable {
     public String toString() {
         return "identificador = " + identificador + ", nom = " + nom ;
     }
+
+    @Override
+    public int compareTo(Client o){
+        return (int)(o.calcularFacturacio()-calcularFacturacio());
+    }; 
+       
+    
+
+
     
     
 }

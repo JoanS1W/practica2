@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Empreses>
+	<Empresa>
+		<identificador>EMP1</identificador>
+		<facturacio>500.0</facturacio>
+		<Pagament>
+			<descripcio>IBAN</descripcio>
+			<iban>213453456FF</iban>
+		<Pagament>
+	</Empresa>
+	<Empresa>
+		<identificador>EMP2</identificador>
+		<facturacio>900.0</facturacio>
+		<Pagament>
+			<descripcio>IBAN</descripcio>
+			<iban>213453456FF</iban>
+		<Pagament>
+	</Empresa>
+	<Empresa>
+		<identificador>EMP3</identificador>
+		<facturacio>0.0</facturacio>
+		<Pagament>
+			<descripcio>IBAN</descripcio>
+			<iban>213453456FF</iban>
+		<Pagament>
+	</Empresa>
+	<Empresa>
+		<identificador>EMP4</identificador>
+		<facturacio>0.0</facturacio>
+		<Pagament>
+			<descripcio>TARGETA</descripcio>
+			<targeta>98989898</targeta>
+			<mes>1</mes>
+			<any>2018</any>
+		<Pagament>
+	</Empresa>
+	<Empresa>
+		<identificador>EMP5</identificador>
+		<facturacio>0.0</facturacio>
+		<Pagament>
+			<descripcio>TARGETA</descripcio>
+			<targeta>00000000</targeta>
+			<mes>5</mes>
+			<any>2019</any>
+		<Pagament>
+	</Empresa>
+</Empreses>

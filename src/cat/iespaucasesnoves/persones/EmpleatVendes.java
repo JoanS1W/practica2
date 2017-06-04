@@ -43,34 +43,15 @@ public class EmpleatVendes extends Empleat {
     }
 
     /*metodes per crear i gestionar factura per l'empleat*/
-    public Factura crearFacturaEmpresa(int producte, int quantitat, double preuUnitari, double descompte) {
+    public Factura crearFacturaEmpresa(int codiFactura, int producte, int quantitat, double preuUnitari, double descompte) {
         //cream factura
-        Factura novaFactura = new Factura(producte, quantitat, preuUnitari, descompte);
+        Factura novaFactura = new Factura(codiFactura, producte, quantitat, preuUnitari, descompte);
         //ficam dins la llista de vendes de l'empleat
         vendes.put(novaFactura.getCodiFactura(), novaFactura);
         //retornam factura per tal de guardar-la dins l'empresa*/
         return novaFactura;
     }
-//    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte) {
-//
-//        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte);
-//        /*insertam la factura dins el llistat de vendes de l'empleat*/
-//        //xk no introdueix res al hashmap??
-//        vendes.put(novaFactura.getCodiFactura(), novaFactura);
-//        /*retornam factura per tal de guardar-la dins el client*/
-//        return novaFactura;
-//
-//    }
 
-//    public FacturaEmpresa facturaEmpresa(int producte, int quantitat, double preuUnitari, int descompte, String numTargeta, Month mesCaducitat, Year anyCaducita) {
-//
-//        FacturaEmpresa novaFactura = new FacturaEmpresa(producte, quantitat, preuUnitari, descompte, banc, numTargeta, mesCaducitat, anyCaducita);
-//        /*insertam la factura dins el llistat de vendes de l'empleat*/
-//
-//        vendes.put(novaFactura.getCodiFactura(), novaFactura);
-//        /*retornam factura per tal de guardar-la dins el client*/
-//        return novaFactura;
-//    }
     public void afegirLiniaFacturaEmpresa(int codiFactura, int producte, int quantitat, double preuUnitari) throws ExcepcioPagadaException, AccioNoRealitzableException {
 
         if (vendes.containsKey(codiFactura)) {

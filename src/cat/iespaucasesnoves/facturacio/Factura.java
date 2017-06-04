@@ -3,7 +3,6 @@ package cat.iespaucasesnoves.facturacio;
 import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
 import java.io.Serializable;
 import java.time.LocalDate;
-import static java.time.LocalDate.now;
 import java.util.ArrayList;
 import static java.time.LocalDate.now;
 
@@ -23,7 +22,7 @@ public class Factura implements Serializable {
     private boolean pagada;
     private double total;
 
-    private static int numeroFactura = 1;
+//    public static int numeroFactura = 0;
     private final int codiFactura;
 
     /**
@@ -41,7 +40,7 @@ public class Factura implements Serializable {
      * @param data de creacio de la factura.
      * @param descompte de la jugueta
      */
-    public Factura(int producte, int quantitat, double preuUnitari, double descompte) {
+    public Factura( int codiFactura, int producte, int quantitat, double preuUnitari, double descompte) {
         productes = new ArrayList<>();
         quantitats = new ArrayList<>();
         preuUnitaris = new ArrayList<>();
@@ -53,9 +52,7 @@ public class Factura implements Serializable {
         this.data = now();
         this.pagada = false;
         this.total = (quantitat * preuUnitari) - (quantitat * preuUnitari) * (descompte / 100);
-
-        codiFactura = numeroFactura;
-        numeroFactura++;
+        this.codiFactura = codiFactura;
 
     }
 
@@ -139,10 +136,19 @@ public class Factura implements Serializable {
             total = total + (preuUnitari * quantitat);
         }
     }
+    
+    //Aquest setter es simplement per poder crear factures antigues per emplear a la classe proves.Despres de les proves s'hauria d'eliminar ja que les factures posen la data automaticament i no es poden canviar.
+    public void setData(String dataNova){
+        
+        data = LocalDate.parse(dataNova);
+    }
 
     @Override
     public String toString() {
-        return "Factura { codiFactura=" + codiFactura + ", productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + '}';
+        return "Factura { codiFactura=" + codiFactura + ", productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + " }";
     }
+
+   
+
 
 }
