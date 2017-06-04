@@ -200,5 +200,17 @@ public class Proves {
         } catch (AccioNoRealitzableException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
+        try {
+            app.nouClientEmpresa("EMP1", "Empresa1", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+        try {
+            app.nouClientEmpresa("EMP8", "Empresa5", TerminiPagament.TRIMESTRAL, "TARGETA", "sa nostra", "00000000", 2015, 13);
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        } catch (DataIncorrecteException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
     }
 }
