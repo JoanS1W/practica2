@@ -18,7 +18,7 @@
 	</Empresa>
 	<Empresa>
 		<identificador>EMP3</identificador>
-		<facturacio>0.0</facturacio>
+		<facturacio>41895.0</facturacio>
 		<Pagament>
 			<descripcio>IBAN</descripcio>
 			<iban>213453456FF</iban>
@@ -36,7 +36,7 @@
 	</Empresa>
 	<Empresa>
 		<identificador>EMP5</identificador>
-		<facturacio>0.0</facturacio>
+		<facturacio>222.84</facturacio>
 		<Pagament>
 			<descripcio>TARGETA</descripcio>
 			<targeta>00000000</targeta>

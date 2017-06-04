@@ -4,11 +4,10 @@ import cat.iespaucasesnoves.excepcions.*;
 import cat.iespaucasesnoves.facturacio.*;
 import cat.iespaucasesnoves.persones.*;
 import cat.iespaucasesnoves.swpro.streams.auxiliar.EinesObjectesStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -95,9 +94,9 @@ public class Proves {
             f6.setData("2017-06-10");
             Factura f7 = app.crearFactura(4, "EMP4", 5, 30, 288, 10);
             //EMP4 trimestral
-            f7.setData("2017-06-20");
+            f7.setData("2017-04-20");
             Factura f8 = app.crearFactura(4, "EMP4", 1, 20, 43.65, 10);
-            f8.setData("2017-06-04");
+            f8.setData("2017-05-04");
             Factura f9 = app.crearFactura(4, "EMP5", 1, 2, 123.8, 10);
             //EMP5 trimestral
             f9.setData("2017-06-20");
@@ -124,108 +123,132 @@ public class Proves {
 
     public static void main(String[] args) throws ExcepcioPagadaException {
 
-        copiarDadesInicialsFitxer("fitxerInicial.dat");
+//        copiarDadesInicialsFitxer("fitxerInicial.dat");
         Aplicacio app = (Aplicacio) EinesObjectesStream.llegeixObjecte("fitxerInicial.dat");
 
         //crear xml amb l'empleat i la seva nomina.
-//        try {
-//            app.crearXml();
-//            app.crearXmlFacturacioMensual();
-//        } catch (IOException ex) {
-//            System.out.println(ex.getMessage());
-//        }
-//        try {
-//            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : ");
-//            System.out.println("\tNomina = " + app.calcularNominaEmpleat(1) + " Euros");
-//
-//            System.out.println("2) Crear Factura per un PARTICULAR que paga al moment i nomes guardam l'import cobrat: ");
-//            System.out.println("\t" + app.crearFactura(7, "PAR1", 2, 25, 4.65, 5));
-//
-//            System.out.println("3) Crear Factura per una EMPRESA : ");
-//            System.out.println("\t" + app.crearFactura(4, "EMP1", 2, 300, 5, 0));
-//
-//            System.out.println("4) Calcular la facturacio per el client empresa amb identificador 'EMP1' : ");
-//            System.out.println("\tLes seves factures son: ");
-//            Empresa e = (Empresa) app.cercarClient("EMP1");
-//            ArrayList<Factura> llistaFactures = e.getFactures();
-//            for (Factura f : llistaFactures) {
-//                System.out.println("\t" + f);
-//            }
-//            System.out.println("   **** Total Facturat = " + app.calcularFacturacio("EMP1") + " ****");
-//            System.out.println("5) Llista de 3 clients amb la facturacio mes alta, al nostre sistema tambe podria sortir un particular que hagues comprat molt ja que duim un registre del que gasta :");
-//            ArrayList<Client> llista = app.llistarMajorFacturacio();
-//            for (int i = 0; i < 3; i++) {
-//                System.out.println("\t" + llista.get(i));
-//            }
-//            System.out.println("6) Llista de clients que han superat un limit de facturacio de '50000.50 Euros' :");
-//            ArrayList<Client> llistaParametritzada = app.llistaFacturacioParametritzada(1590.50);
-//            Collections.sort(llistaParametritzada);
-//            for (int i = 0; i < llistaParametritzada.size(); i++) {
-//                System.out.println("\t" + llistaParametritzada.get(i));
-//            }
-//
-//            System.out.println("7) Llista de les 3 majors facturacions :");
-//            ArrayList<Client> majors = app.llistarMajorFacturacio();
-//            for (int i = 0; i < 3; i++) {
-//                System.out.println("\t" + majors.get(i));
-//            }
-//
-//        } catch (AccioNoRealitzableException | ExcepcioPagadaException | ValorNegatiuException ex) {
-//            System.out.println("ERROR: " + ex.getMessage());
-//        }
-        //Llistar empreses i particulars
-        System.out.println("*******Llistar empreses dels que disposam amb les facturesper veure si es cobren o no***********");
-        ArrayList<Empresa> llistaEmpreses = app.getEmpreses();
-        for (Empresa empresa : llistaEmpreses) {
-            System.out.println(empresa);
-            ArrayList<Factura> factures = empresa.getFactures();
-            for (int i = 0; i < factures.size(); i++) {
-                System.out.println("\t" + factures.get(i));
-            }
-        }
-//         System.out.println("*******Llistar particulars dels que disposam amb els imports que hens han gastat***********");
-//        ArrayList<Particular> llistaParticulars = app.getParticulars();
-//        for (Particular particular : llistaParticulars) {
-//            System.out.println(particular);
-//            ArrayList<Double> factures = particular.getImportsPagats();
-//            for (int i = 0; i < factures.size(); i++) {
-//                System.out.println("\t IMPORT : "+ factures.get(i));
-//            }
-//        }
-
-//        try {
-//            app.nouClientParticular("PAR3", "Particular3");
-//        } catch (AccioNoRealitzableException ex) {
-//            System.out.println("ERROR: " + ex.getMessage());
-//        }
-//        try {
-//            app.nouClientEmpresa("EMP1", "Empresa1", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
-//        } catch (AccioNoRealitzableException ex) {
-//            System.out.println("ERROR: " + ex.getMessage());
-//        }
-//        try {
-//            app.nouClientEmpresa("EMP8", "Empresa5", TerminiPagament.TRIMESTRAL, "TARGETA", "sa nostra", "00000000", 2015, 13);
-//        } catch (AccioNoRealitzableException ex) {
-//            System.out.println("ERROR: " + ex.getMessage());
-//        } catch (DataIncorrecteException ex) {
-//            System.out.println("ERROR: " + ex.getMessage());
-            
-//    }
         try {
-                app.cobramentDeFactures();
-            } catch (ExcepcioPagadaException e) {
-                System.out.println("ERROR : " + e.getMessage());
-            }
-                System.out.println("*******Llistar empreses dels que disposam amb les facturesper veure si es cobren o no***********");
-        ArrayList<Empresa> llistaEmpreses2 = app.getEmpreses();
-        for (Empresa empresa : llistaEmpreses2) {
-            System.out.println(empresa);
-            ArrayList<Factura> factures = empresa.getFactures();
-            for (int i = 0; i < factures.size(); i++) {
-                System.out.println("\t" + factures.get(i));
-            }
+            File xml = app.crearXml();
+            app.crearXmlFacturacioMensual();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
+        try {
+            System.out.println("1) Calcular nomina d'un Empleat introduint el seu codi d'empresa : ");
+            System.out.println("\tNomina = " + app.calcularNominaEmpleat(1) + " Euros");
+
+            System.out.println("2) Crear Factura per un PARTICULAR que paga al moment i nomes guardam l'import cobrat: ");
+            System.out.println("\t" + app.crearFactura(7, "PAR1", 2, 25, 4.65, 5));
+
+            System.out.println("3) Crear Factura per una EMPRESA : ");
+            System.out.println("\t" + app.crearFactura(4, "EMP1", 2, 300, 5, 0));
+
+            System.out.println("4) Calcular la facturacio per el client empresa amb identificador 'EMP1' : ");
+            System.out.println("\tLes seves factures son: ");
+            Empresa e = (Empresa) app.cercarClient("EMP1");
+            ArrayList<Factura> llistaFactures = e.getFactures();
+            for (Factura f : llistaFactures) {
+                System.out.println("\t" + f);
+            }
+            System.out.println("   **** Total Facturat = " + app.calcularFacturacio("EMP1") + " ****");
+            System.out.println("5) Llista de 3 clients amb la facturacio mes alta, al nostre sistema tambe podria sortir un particular que hagues comprat molt ja que duim un registre del que gasta :");
+            ArrayList<Client> llista = app.llistarMajorFacturacio();
+            for (int i = 0; i < 3; i++) {
+                System.out.println("\t" + llista.get(i));
+            }
+            System.out.println("6) Llista de clients que han superat un limit de facturacio de '1590.50 Euros' :");
+            ArrayList<Client> llistaParametritzada = app.llistaFacturacioParametritzada(1590.50);
+            Collections.sort(llistaParametritzada);
+            for (int i = 0; i < llistaParametritzada.size(); i++) {
+                System.out.println("\t" + llistaParametritzada.get(i));
+            }
+
+            System.out.println("7) Llista de les 3 majors facturacions :");
+            ArrayList<Client> majors = app.llistarMajorFacturacio();
+            for (int i = 0; i < 3; i++) {
+                System.out.println("\t" + majors.get(i));
+            }
+
+            //Llistar empreses i particulars
+            System.out.println("8) Llistat empreses amb les factures nomes cobrades DIARIES (Empresa amb codi EMP1)\n");
+            ArrayList<Empresa> llistaEmpreses = app.getEmpreses();
+            for (Empresa empresa : llistaEmpreses) {
+                System.out.println(empresa);
+                ArrayList<Factura> factures = empresa.getFactures();
+                for (int i = 0; i < factures.size(); i++) {
+                    System.out.println("\t\t\t" + factures.get(i));
+                }
+            }
+
+            //cobrar factures trimestrals (2017-06-29)
+            app.cobramentDeFactures();
+
+            System.out.println("");
+            System.out.println("9) Llistat empreses de les quals hem cobrat les TRIMESTRALS (Empresa 4 i 5, EMP4 i EMP5)***********\n");
+            ArrayList<Empresa> llistaEmpreses2 = app.getEmpreses();
+            for (Empresa empresa : llistaEmpreses2) {
+                System.out.println(empresa);
+                ArrayList<Factura> factures = empresa.getFactures();
+                for (int i = 0; i < factures.size(); i++) {
+                    System.out.println("\t\t\t" + factures.get(i));
+                }
+            }
+
+            System.out.println("10) Agegir 3 productes a una factura existent i no pagada : \n");
+            //afegir 3 productes mes a factura
+            ArrayList<Empresa> llistaEmpreses3 = app.getEmpreses();
+            for (Empresa empresa : llistaEmpreses3) {
+                if ((empresa.getIdentificador()).equals("EMP2")) {
+                    ArrayList<Factura> llistaFactura = empresa.getFactures();
+                    System.out.println("Linies inicials = " + llistaFactura.get(0).getPreuUnitari().size());
+                    app.afegirProducteFacturaEmpresa(2, 3, 3, 10, 10);
+                    app.afegirProducteFacturaEmpresa(2, 3, 2, 10, 10);
+                    app.afegirProducteFacturaEmpresa(2, 3, 1, 10, 10);
+                    System.out.println("Linies Posteriors = " + llistaFactura.get(0).getPreuUnitari().size());
+                }
+            }
+
+        } catch (AccioNoRealitzableException | ExcepcioPagadaException | ValorNegatiuException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
         }
-    
+
+        System.out.println("");
+        System.out.println("PROVA D'ERRORS CAPTURATS\n");
+
+        System.out.println("11) Crear empleat vendes que ja existeix :");
+        try {
+            app.nouClientEmpresa("EMP1", "Empresa1", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+
+        System.out.println("12) Crear empresa amb data de targeta no valida :");
+        try {
+            app.nouClientEmpresa("EMP8", "Empresa5", TerminiPagament.TRIMESTRAL, "TARGETA", "sa nostra", "00000000", 2015, 13);
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        } catch (DataIncorrecteException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
+
+        System.out.println("13) Agefir producte a una factura que esta pagada : ");
+        try {
+            app.afegirProducteFacturaEmpresa(1, 1, 3, 10, 102);
+        } catch (ExcepcioPagadaException | AccioNoRealitzableException ex) {
+            System.out.println("ERROR : " + ex.getMessage());
+        }
+
+        try {
+            System.out.println("14) Llista de clients que han superat un limit de facturacio amb valor negatiu '-1590.50 Euros' :");
+            ArrayList<Client> llistaParametritzada = app.llistaFacturacioParametritzada(-1590.50);
+            Collections.sort(llistaParametritzada);
+            for (int i = 0; i < llistaParametritzada.size(); i++) {
+                System.out.println("\t" + llistaParametritzada.get(i));
+            }
+        } catch (ValorNegatiuException e) {
+            System.out.println("ERROR : "+e.getMessage());
+        }
+
     }
 
+}

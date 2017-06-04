@@ -102,7 +102,7 @@ public abstract class Empleat implements Serializable {
 
     @Override
     public String toString() {
-        return "Empleat{" + "codi=" + codi + ", nomComplet=" + nomComplet + ", identificador=" + identificador + ", email=" + email + ", telefon=" + telefon + ", direccio=" + direccio + ", categoria=" + categoria + ", salariBase=" + salariBase + '}';
+        return " codi=" + codi + ", nomComplet=" + nomComplet + ", identificador=" + identificador + ", salariBase=" + salariBase;
     }
 
     @Override

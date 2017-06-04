@@ -85,7 +85,7 @@ public class EmpleatVendes extends Empleat {
 
     @Override
     public String toString() {
-        return "EmpleatVendes{" + "comissio=" + comissio + ", vendes=" + vendes + '}';
+        return "EmpleatVendes{" + super.toString() + " ,comissio=" + comissio + ",\n vendes=" + vendes.values() + '}';
     }
 
 }
