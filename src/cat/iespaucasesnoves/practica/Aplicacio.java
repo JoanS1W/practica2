@@ -275,7 +275,7 @@ public class Aplicacio implements Serializable {
         Empresa client = new Empresa(identificadorEmpresa, nom, metodePagament, formaPagament, banc, numTarg, any, mes);
         LocalDate data = LocalDate.now();
 
-        if (any < data.getYear() && mes < 0 && mes > 12) {
+        if (any < data.getYear() || mes < 0 || mes > 12) {
             throw new DataIncorrecteException("Les dades any o mes de la targeta són incorrectes.");
         } else {
             for (Client cli : empreses.values()) {
@@ -311,49 +311,8 @@ public class Aplicacio implements Serializable {
         particulars.put(client.getIdentificador(), client);
     }
 
-    public ArrayList<Client> llistarMajorFacturacio() {
-        ArrayList<Client> llista = new ArrayList<>();
-        ArrayList<Client> tots = new ArrayList<>();
-        Client major1;
-        Client major2;
-        Client major3;
-        Client auxCl = null;
-        double aux = 0;
-        for (Empresa client : empreses.values()) {
-            tots.add(client);
-        }
-        for (Particular client : particulars.values()) {
-            tots.add(client);
-        }
-        for (Client client : tots) {
-            if (aux < client.calcularFacturacio()) {
-                aux = client.calcularFacturacio();
-                auxCl = client;
-            }
-        }
-        major1 = auxCl;
-        for (Client client : tots) {
-            if (aux < client.calcularFacturacio() && client.calcularFacturacio() != major1.calcularFacturacio()) {
-                aux = client.calcularFacturacio();
-                auxCl = client;
-            }
-        }
-        major2 = auxCl;
-        for (Client client : tots) {
-            if (aux < client.calcularFacturacio() && client.calcularFacturacio() != major2.calcularFacturacio() && client.calcularFacturacio() != major1.calcularFacturacio()) {
-                aux = client.calcularFacturacio();
-                auxCl = client;
-            }
-        }
-        major3 = auxCl;
-        llista.add(major1);
-        llista.add(major2);
-        llista.add(major3);
-        return llista;
-    }
-
     //llista 3 majors amb ordenacio
-    public ArrayList<Client> llistarMajorFacturacio2() {
+    public ArrayList<Client> llistarMajorFacturacio() {
         ArrayList<Client> llistaFinal = new ArrayList<>();
         ArrayList<Empresa> llistaEmpreses = getEmpreses();
         ArrayList<Particular> llistaParticulars = getParticulars();

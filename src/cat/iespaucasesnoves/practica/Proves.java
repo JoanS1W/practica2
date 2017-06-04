@@ -153,7 +153,7 @@ public class Proves {
             }
             System.out.println("   **** Total Facturat = " + app.calcularFacturacio("EMP1") + " ****");
             System.out.println("5) Llista de 3 clients amb la facturacio mes alta, al nostre sistema tambe podria sortir un particular que hagues comprat molt ja que duim un registre del que gasta :");
-            ArrayList<Client> llista = app.llistarMajorFacturacio2();
+            ArrayList<Client> llista = app.llistarMajorFacturacio();
             for (int i = 0; i < 3; i++) {
                 System.out.println("\t" + llista.get(i));
             }
@@ -165,7 +165,7 @@ public class Proves {
             }
 
             System.out.println("7) Llista de les 3 majors facturacions :");
-            ArrayList<Client> majors = app.llistarMajorFacturacio2();
+            ArrayList<Client> majors = app.llistarMajorFacturacio();
             for (int i = 0; i < 3; i++) {
                 System.out.println("\t" + majors.get(i));
             }
