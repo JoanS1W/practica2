@@ -5,6 +5,7 @@ import cat.iespaucasesnoves.excepcions.ExcepcioPagadaException;
 import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import cat.iespaucasesnoves.facturacio.Factura;
 import cat.iespaucasesnoves.facturacio.Jugueta;
+import cat.iespaucasesnoves.facturacio.TerminiPagament;
 import cat.iespaucasesnoves.persones.*;
 import java.io.File;
 import java.io.FileWriter;
@@ -252,12 +253,42 @@ public class Aplicacio implements Serializable {
         empleatsGenerals.put(empleat.getCodi(), empleat);
     }
 
-    public void nouClientEmpresa() {
-
+    public void nouClientEmpresa(String identificadorEmpresa, String nom, TerminiPagament metodePagament, String formaPagament, String banc, String iban) throws AccioNoRealitzableException {
+        Empresa client = new Empresa(identificadorEmpresa, nom, metodePagament, formaPagament, banc, iban);
+        for (Client cli : empreses.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        for (Client cli : particulars.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        empreses.put(client.getIdentificador(), client);
+    }
+    
+        public void nouClientEmpresa(String identificadorEmpresa, String nom, TerminiPagament metodePagament, String formaPagament, String banc, String numTarg, int any, int mes) throws AccioNoRealitzableException {
+        Empresa client = new Empresa(identificadorEmpresa, nom, metodePagament, formaPagament, banc, numTarg, any, mes);
+        for (Client cli : empreses.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        for (Client cli : particulars.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        empreses.put(client.getIdentificador(), client);
     }
 
-    public void nouClientParticular(String nom, String identificador) throws AccioNoRealitzableException {
-        Particular client = new Particular(nom, identificador);
+    public void nouClientParticular(String identificador, String nom) throws AccioNoRealitzableException {
+        Particular client = new Particular(identificador, nom);
         for (Client cli : particulars.values()) {
             if (cli.equals(client)) {
                 client = null;

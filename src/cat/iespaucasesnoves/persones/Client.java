@@ -68,10 +68,8 @@ public abstract class Client implements Serializable, Comparable<Client> {
         if (!Objects.equals(this.identificador, other.identificador)) {
             return false;
         }
-        if (!Objects.equals(this.nom, other.nom)) {
-            return false;
-        }
         return true;
     }
+ 
 
 }

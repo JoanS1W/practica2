@@ -107,7 +107,7 @@ public abstract class Empleat implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
         return hash;
     }
 
@@ -123,12 +123,10 @@ public abstract class Empleat implements Serializable {
             return false;
         }
         final Empleat other = (Empleat) obj;
-        if (!Objects.equals(this.nomComplet, other.nomComplet)) {
-            return false;
-        }
         if (!Objects.equals(this.identificador, other.identificador)) {
             return false;
         }
         return true;
     }
+
 }

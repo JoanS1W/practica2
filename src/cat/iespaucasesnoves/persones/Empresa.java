@@ -36,7 +36,7 @@ public class Empresa extends Client {
     }
 
     //constructor per crear empresa amb pagament TARGETA.
-    public Empresa(String nom, String identificadorEmpresa, TerminiPagament metodePagament, String formaPagament, String banc, String numTarg, int any, int mes) {
+    public Empresa(String identificadorEmpresa, String nom, TerminiPagament metodePagament, String formaPagament, String banc, String numTarg, int any, int mes) {
         super(identificadorEmpresa, nom);
         this.metodePagament = metodePagament;
         this.formaPagament = formaPagament;
