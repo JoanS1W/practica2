@@ -161,7 +161,10 @@ public class Aplicacio implements Serializable {
         if ((client instanceof Empresa) && (empleat instanceof EmpleatVendes)) {
             Factura facturaEmpresa = ((EmpleatVendes) empleat).crearFacturaEmpresa(numFactura, producte, quantitat, preuUnitari, descompte);
             numFactura++;
-            //TODO mirar metodePagament de la empresa i si es diari posar pagada i guardarla.<-------------------------------------------------
+            //miram metodePagament de la empresa i si es diari posar pagada i guardarla.
+            if ((((Empresa) client).getMetodePagament()).equals(TerminiPagament.DIARI)) {
+                facturaEmpresa.setPagada(true);
+            }
             ((Empresa) client).afegirFactura(facturaEmpresa);
             return facturaEmpresa;
 
