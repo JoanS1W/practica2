@@ -70,6 +70,5 @@ public abstract class Client implements Serializable, Comparable<Client> {
         }
         return true;
     }
- 
 
 }

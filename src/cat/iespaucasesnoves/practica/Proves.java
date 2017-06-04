@@ -196,7 +196,7 @@ public class Proves {
 
         app.cobramentDeFactures();
         try {
-            app.nouClientParticular("PAR5", "Particular3");
+            app.nouClientParticular("PAR3", "Particular3");
         } catch (AccioNoRealitzableException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }

@@ -40,7 +40,7 @@ public class Factura implements Serializable {
      * @param data de creacio de la factura.
      * @param descompte de la jugueta
      */
-    public Factura( int codiFactura, int producte, int quantitat, double preuUnitari, double descompte) {
+    public Factura(int codiFactura, int producte, int quantitat, double preuUnitari, double descompte) {
         productes = new ArrayList<>();
         quantitats = new ArrayList<>();
         preuUnitaris = new ArrayList<>();
@@ -136,10 +136,10 @@ public class Factura implements Serializable {
             total = total + (preuUnitari * quantitat);
         }
     }
-    
+
     //Aquest setter es simplement per poder crear factures antigues per emplear a la classe proves.Despres de les proves s'hauria d'eliminar ja que les factures posen la data automaticament i no es poden canviar.
-    public void setData(String dataNova){
-        
+    public void setData(String dataNova) {
+
         data = LocalDate.parse(dataNova);
     }
 
@@ -147,8 +147,5 @@ public class Factura implements Serializable {
     public String toString() {
         return "Factura { codiFactura=" + codiFactura + ", productes=" + productes + ", quantitats=" + quantitats + ", preuUnitaris=" + preuUnitaris + ", descompte=" + descompte + ", data=" + data + ", pagada=" + pagada + ", total=" + total + " }";
     }
-
-   
-
 
 }

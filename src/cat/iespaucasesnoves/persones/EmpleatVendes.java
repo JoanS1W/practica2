@@ -87,5 +87,5 @@ public class EmpleatVendes extends Empleat {
     public String toString() {
         return "EmpleatVendes{" + "comissio=" + comissio + ", vendes=" + vendes + '}';
     }
-    
+
 }
