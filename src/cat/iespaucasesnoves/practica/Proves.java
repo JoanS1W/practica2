@@ -109,7 +109,7 @@ public class Proves {
         } catch (AccioNoRealitzableException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         } catch (ExcepcioPagadaException e) {
-            System.out.println("ERROR");
+            System.out.println("ERROR" + e.getMessage());
         }
 
         // copiam objecte aplicacio al fitxer.
@@ -193,27 +193,39 @@ public class Proves {
 //            }
 //        }
 
+//        try {
+//            app.nouClientParticular("PAR3", "Particular3");
+//        } catch (AccioNoRealitzableException ex) {
+//            System.out.println("ERROR: " + ex.getMessage());
+//        }
+//        try {
+//            app.nouClientEmpresa("EMP1", "Empresa1", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
+//        } catch (AccioNoRealitzableException ex) {
+//            System.out.println("ERROR: " + ex.getMessage());
+//        }
+//        try {
+//            app.nouClientEmpresa("EMP8", "Empresa5", TerminiPagament.TRIMESTRAL, "TARGETA", "sa nostra", "00000000", 2015, 13);
+//        } catch (AccioNoRealitzableException ex) {
+//            System.out.println("ERROR: " + ex.getMessage());
+//        } catch (DataIncorrecteException ex) {
+//            System.out.println("ERROR: " + ex.getMessage());
+            
+//    }
         try {
-            app.nouClientParticular("PAR3", "Particular3");
-        } catch (AccioNoRealitzableException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-        try {
-            app.nouClientEmpresa("EMP1", "Empresa1", TerminiPagament.DIARI, "IBAN", "la caixa", "213453456FF");
-        } catch (AccioNoRealitzableException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        }
-        try {
-            app.nouClientEmpresa("EMP8", "Empresa5", TerminiPagament.TRIMESTRAL, "TARGETA", "sa nostra", "00000000", 2015, 13);
-        } catch (AccioNoRealitzableException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        } catch (DataIncorrecteException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-            try {
                 app.cobramentDeFactures();
             } catch (ExcepcioPagadaException e) {
                 System.out.println("ERROR : " + e.getMessage());
             }
+                System.out.println("*******Llistar empreses dels que disposam amb les facturesper veure si es cobren o no***********");
+        ArrayList<Empresa> llistaEmpreses2 = app.getEmpreses();
+        for (Empresa empresa : llistaEmpreses2) {
+            System.out.println(empresa);
+            ArrayList<Factura> factures = empresa.getFactures();
+            for (int i = 0; i < factures.size(); i++) {
+                System.out.println("\t" + factures.get(i));
+            }
         }
+        }
+    
     }
-}
+
