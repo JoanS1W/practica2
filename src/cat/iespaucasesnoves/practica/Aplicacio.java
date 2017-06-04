@@ -209,7 +209,7 @@ public class Aplicacio implements Serializable {
             EmpleatVendes empleat = empleatsVendes.get(codiEmpleat);
             // Nomes l'empleat que ha creat la factura li podra afegir,el control es fa dins empleat.
             empleat.modificarLiniaFacturaEmpresa(codiFactura, linia, producte, quantitat, preuUnitari);
-        }else{
+        } else {
             throw new AccioNoRealitzableException("Empleat i/o jugueta inexistents.");
         }
     }
@@ -390,11 +390,11 @@ public class Aplicacio implements Serializable {
             //cobram mensuals
             for (Empresa empresa : empreses.values()) {
                 if ((empresa.getMetodePagament()).equals(TerminiPagament.MENSUAL)) {
-                for (Factura factura : empresa.getFactures()) {
-                    if (factura.getData().getMonthValue() < 31) {
-                        factura.setPagada(true);
+                    for (Factura factura : empresa.getFactures()) {
+                        if (factura.getData().getMonthValue() < 31) {
+                            factura.setPagada(true);
+                        }
                     }
-                }
                 }
             }
         }
@@ -405,11 +405,11 @@ public class Aplicacio implements Serializable {
             int tercerMes = data.getMonthValue();
             for (Empresa empresa : empreses.values()) {
                 if ((empresa.getMetodePagament()).equals(TerminiPagament.TRIMESTRAL)) {
-                for (Factura factura : empresa.getFactures()) {
-                    if ((factura.getData().getMonthValue() == primerMes) | (factura.getData().getMonthValue() == segonMesMes) | (factura.getData().getMonthValue() == tercerMes)) {
-                        factura.setPagada(true);
+                    for (Factura factura : empresa.getFactures()) {
+                        if ((factura.getData().getMonthValue() == primerMes) | (factura.getData().getMonthValue() == segonMesMes) | (factura.getData().getMonthValue() == tercerMes)) {
+                            factura.setPagada(true);
+                        }
                     }
-                }
                 }
             }
         }
@@ -445,6 +445,5 @@ public class Aplicacio implements Serializable {
         }
         return null;
     }
-    
-   
+
 }

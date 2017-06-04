@@ -246,7 +246,7 @@ public class Proves {
                 System.out.println("\t" + llistaParametritzada.get(i));
             }
         } catch (ValorNegatiuException e) {
-            System.out.println("ERROR : "+e.getMessage());
+            System.out.println("ERROR : " + e.getMessage());
         }
 
     }
