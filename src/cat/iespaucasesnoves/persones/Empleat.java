@@ -2,6 +2,7 @@ package cat.iespaucasesnoves.persones;
 
 import cat.iespaucasesnoves.excepcions.ValorNegatiuException;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
@@ -104,4 +105,30 @@ public abstract class Empleat implements Serializable {
         return "Empleat{" + "codi=" + codi + ", nomComplet=" + nomComplet + ", identificador=" + identificador + ", email=" + email + ", telefon=" + telefon + ", direccio=" + direccio + ", categoria=" + categoria + ", salariBase=" + salariBase + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empleat other = (Empleat) obj;
+        if (!Objects.equals(this.nomComplet, other.nomComplet)) {
+            return false;
+        }
+        if (!Objects.equals(this.identificador, other.identificador)) {
+            return false;
+        }
+        return true;
+    }
 }

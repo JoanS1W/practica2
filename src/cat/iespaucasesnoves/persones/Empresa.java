@@ -25,7 +25,7 @@ public class Empresa extends Client {
     private int mes;
 
     //constructor per crear empresa amb pagament IBAN.
-    public Empresa(String nom, String identificadorEmpresa, TerminiPagament metodePagament, String formaPagament, String banc, String iban) {
+    public Empresa(String identificadorEmpresa, String nom, TerminiPagament metodePagament, String formaPagament, String banc, String iban) {
         super(identificadorEmpresa, nom);
         this.metodePagament = metodePagament;
         this.formaPagament = formaPagament;

@@ -16,15 +16,15 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class Aplicacio implements Serializable {
-    
-    private HashMap<Integer, EmpleatVendes> empleatsVendes; 
-    private HashMap<Integer, EmpleatGeneral> empleatsGenerals; 
-    private HashMap<String, Empresa> empreses; 
-    private HashMap<String, Particular> particulars; 
-    private HashMap<Integer, Jugueta> juguetes; 
+
+    private HashMap<Integer, EmpleatVendes> empleatsVendes;
+    private HashMap<Integer, EmpleatGeneral> empleatsGenerals;
+    private HashMap<String, Empresa> empreses;
+    private HashMap<String, Particular> particulars;
+    private HashMap<Integer, Jugueta> juguetes;
     private int numFactura;
-    
-    public Aplicacio(){
+
+    public Aplicacio() {
         empleatsVendes = new HashMap<>();
         empleatsGenerals = new HashMap<>();
         empreses = new HashMap<>();
@@ -92,7 +92,7 @@ public class Aplicacio implements Serializable {
     public void afegirJuguetes(Jugueta jugueta) {
         this.juguetes.put(jugueta.getCodi(), jugueta);
     }
-    
+
     public File crearXml() throws IOException {
         File arxiu = new File("arxiu.xml");
         FileWriter fileWriter = new FileWriter(arxiu);
@@ -128,27 +128,25 @@ public class Aplicacio implements Serializable {
 
         fileWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         fileWriter.write("<Empreses>\n");
-            for (Empresa e : empreses.values()) {
-                        fileWriter.write("\t<Empresa>\n");
+        for (Empresa e : empreses.values()) {
+            fileWriter.write("\t<Empresa>\n");
             fileWriter.write("\t\t<identificador>" + e.getIdentificador() + "</identificador>\n");
-            fileWriter.write("\t\t<facturacio>" + e.calcularFacturacioMensual()+ "</facturacio>\n");
+            fileWriter.write("\t\t<facturacio>" + e.calcularFacturacioMensual() + "</facturacio>\n");
             fileWriter.write("\t\t<Pagament>\n");
-            fileWriter.write("\t\t\t<descripcio>"+ e.getFormaPagament()+"</descripcio>\n");
-                if (e.getFormaPagament().equalsIgnoreCase("IBAN")) {
-                    fileWriter.write("\t\t\t<iban>"+ e.getIban()+"</iban>\n");
-                }else{
-                    fileWriter.write("\t\t\t<targeta>"+ e.getNumTarg()+"</targeta>\n");
-                    fileWriter.write("\t\t\t<mes>"+ e.getMes()+"</mes>\n");
-                    fileWriter.write("\t\t\t<any>"+ e.getAny()+"</any>\n");
-                }
+            fileWriter.write("\t\t\t<descripcio>" + e.getFormaPagament() + "</descripcio>\n");
+            if (e.getFormaPagament().equalsIgnoreCase("IBAN")) {
+                fileWriter.write("\t\t\t<iban>" + e.getIban() + "</iban>\n");
+            } else {
+                fileWriter.write("\t\t\t<targeta>" + e.getNumTarg() + "</targeta>\n");
+                fileWriter.write("\t\t\t<mes>" + e.getMes() + "</mes>\n");
+                fileWriter.write("\t\t\t<any>" + e.getAny() + "</any>\n");
+            }
             fileWriter.write("\t\t<Pagament>\n");
             fileWriter.write("\t</Empresa>\n");
         }
         fileWriter.write("</Empreses>");
         fileWriter.close();
     }
-    
- 
 
     /* metode per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio.
     public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
@@ -189,7 +187,7 @@ public class Aplicacio implements Serializable {
             // Nomes l'empleat que ha creat la factura li podra afegir
             // productes, sino retorna excepcio que tractarem a Proves.
             empleat.afegirLiniaFacturaEmpresa(codiFactura, producte, quantitat, preuUnitari);
-        }else if (!empleatsVendes.containsKey(codiEmpleat)) {
+        } else if (!empleatsVendes.containsKey(codiEmpleat)) {
             throw new AccioNoRealitzableException("Codi empleat incorrecte o sense permisos per realitzar l'accio. ");
         } else {
             throw new AccioNoRealitzableException("Producte inexistent. ");
@@ -236,7 +234,6 @@ public class Aplicacio implements Serializable {
         }
         empleatsVendes.put(empleat.getCodi(), empleat);
     }
-    
 
     public void nouEmpleatGeneral(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double horesExtres, double preuHora) throws AccioNoRealitzableException {
         EmpleatGeneral empleat = new EmpleatGeneral(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, horesExtres, preuHora);
@@ -259,8 +256,21 @@ public class Aplicacio implements Serializable {
 
     }
 
-    public void nouClientParticular() {
-
+    public void nouClientParticular(String nom, String identificador) throws AccioNoRealitzableException {
+        Particular client = new Particular(nom, identificador);
+        for (Client cli : particulars.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        for (Client cli : empreses.values()) {
+            if (cli.equals(client)) {
+                client = null;
+                throw new AccioNoRealitzableException("Ja existeix aquest client.");
+            }
+        }
+        particulars.put(client.getIdentificador(), client);
     }
 
     public ArrayList<Client> llistarMajorFacturacio() {
@@ -303,9 +313,9 @@ public class Aplicacio implements Serializable {
         llista.add(major3);
         return llista;
     }
-    
+
     //llista 3 majors amb ordenacio
-    public ArrayList<Client> llistarMajorFacturacio2(){
+    public ArrayList<Client> llistarMajorFacturacio2() {
         ArrayList<Client> llistaFinal = new ArrayList<>();
         ArrayList<Empresa> llistaEmpreses = getEmpreses();
         ArrayList<Particular> llistaParticulars = getParticulars();
@@ -317,8 +327,8 @@ public class Aplicacio implements Serializable {
             llistaFinal.add(llistaEmpreses.get(i));
             llistaFinal.add(llistaParticulars.get(i));
         }
-        Collections.sort(llistaFinal);         
-  
+        Collections.sort(llistaFinal);
+
         return llistaFinal;
     }
 
@@ -339,56 +349,55 @@ public class Aplicacio implements Serializable {
             }
         }
         return llista;
-    }    
+    }
 
     public double calcularFacturacio(String identificadorClient) throws AccioNoRealitzableException {
         //cercam si exiteix un client amb aquest identificador.
         Client client = cercarClient(identificadorClient);
         if (client != null) {
             return client.calcularFacturacio();
-        }
-        else {
+        } else {
             throw new AccioNoRealitzableException("El client no existeix al sistema");
         }
 
     }
-    
-    public double calcularFacturacioMensualEmpresa (String identificadorClient) throws AccioNoRealitzableException {
+
+    public double calcularFacturacioMensualEmpresa(String identificadorClient) throws AccioNoRealitzableException {
         Empresa empresa = empreses.get(identificadorClient);
         //calculam la seva facturacio mensual
         if (empresa == null) {
-        return empresa.calcularFacturacioMensual();           
-        }else{
+            return empresa.calcularFacturacioMensual();
+        } else {
             throw new AccioNoRealitzableException("Empresa inexistent al sistema.");
         }
     }
 
     public void cobramentDeFactures() {
-            LocalDate data = LocalDate.parse("2017-06-30");
-            System.out.println(data);
-            System.out.println(data.getDayOfWeek());
-            System.out.println(data.getDayOfMonth());
-            System.out.println(data.getDayOfYear());
-            if (data.getDayOfWeek().equals("SATURDAY") ) {
+        LocalDate data = LocalDate.parse("2017-06-30");
+        System.out.println(data);
+        System.out.println(data.getDayOfWeek());
+        System.out.println(data.getDayOfMonth());
+        System.out.println(data.getDayOfYear());
+        if (data.getDayOfWeek().equals("SATURDAY")) {
             //cobram emprese semanals
-                System.out.println("Cobrament de semanals");
-                for (Empresa empresa : empreses.values()) {
-                    for (Factura factura : empresa.getFactures()) {
+            System.out.println("Cobrament de semanals");
+            for (Empresa empresa : empreses.values()) {
+                for (Factura factura : empresa.getFactures()) {
 //                        if (factura.getData().getDayOfWeek() < "SATURDAY") {
 //                            
 //                        }
-                    }
                 }
             }
-            if (data.getDayOfMonth() == 30 | data.getDayOfMonth() == 31) {
-            //cobram mensuals
-                System.out.println("mensuals");
-            }
-            if (data.getDayOfYear() % 91 == 0) {
-            //cobram trimestrals
-                System.out.println("trimestrals");
         }
-            
+        if (data.getDayOfMonth() == 30 | data.getDayOfMonth() == 31) {
+            //cobram mensuals
+            System.out.println("mensuals");
+        }
+        if (data.getDayOfYear() % 91 == 0) {
+            //cobram trimestrals
+            System.out.println("trimestrals");
+        }
+
     }
 
     //metodes de cerca de l'objecte ja que desde la aplicacio lo normal sera executar els metodes amb els codis identificatius.
@@ -420,5 +429,5 @@ public class Aplicacio implements Serializable {
         }
         return null;
     }
-    
+
 }

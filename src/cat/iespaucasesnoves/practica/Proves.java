@@ -7,6 +7,8 @@ import cat.iespaucasesnoves.swpro.streams.auxiliar.EinesObjectesStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -168,11 +170,7 @@ public class Proves {
                 System.out.println("\t" + majors.get(i));
             }
 
-        } catch (AccioNoRealitzableException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        } catch (ExcepcioPagadaException ex) {
-            System.out.println("ERROR: " + ex.getMessage());
-        } catch (ValorNegatiuException ex) {
+        } catch (AccioNoRealitzableException | ExcepcioPagadaException | ValorNegatiuException ex) {
             System.out.println("ERROR: " + ex.getMessage());
         }
 
@@ -197,6 +195,10 @@ public class Proves {
 //        }
 
         app.cobramentDeFactures();
+        try {
+            app.nouClientParticular("PAR5", "Particular3");
+        } catch (AccioNoRealitzableException ex) {
+            System.out.println("ERROR: " + ex.getMessage());
+        }
     }
-
 }

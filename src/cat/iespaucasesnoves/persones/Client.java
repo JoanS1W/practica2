@@ -1,8 +1,7 @@
 package cat.iespaucasesnoves.persones;
 
 import java.io.Serializable;
-
-
+import java.util.Objects;
 
 /**
  *
@@ -13,10 +12,10 @@ public abstract class Client implements Serializable, Comparable<Client> {
     String identificador;
     String nom;
 
-    public Client(String nom ,String identificador) {
+    public Client(String identificador, String nom) {
         this.identificador = identificador;
         this.nom = nom;
-    }    
+    }
 
     public abstract double calcularFacturacio();
 
@@ -38,17 +37,41 @@ public abstract class Client implements Serializable, Comparable<Client> {
 
     @Override
     public String toString() {
-        return "identificador = " + identificador + ", nom = " + nom ;
+        return "identificador = " + identificador + ", nom = " + nom;
     }
 
     @Override
-    public int compareTo(Client o){
-        return (int)(o.calcularFacturacio()-calcularFacturacio());
-    }; 
-       
-    
+    public int compareTo(Client o) {
+        return (int) (o.calcularFacturacio() - calcularFacturacio());
+    }
 
+    ; 
 
-    
-    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Client other = (Client) obj;
+        if (!Objects.equals(this.identificador, other.identificador)) {
+            return false;
+        }
+        if (!Objects.equals(this.nom, other.nom)) {
+            return false;
+        }
+        return true;
+    }
+
 }

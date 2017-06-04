@@ -10,7 +10,7 @@ public class Particular extends Client {
 
     private ArrayList<Double> importsPagats;
 
-    public Particular(String nom, String identificador) {
+    public Particular(String identificador, String nom) {
         super(identificador, nom);
         this.importsPagats = new ArrayList<>();
     }
