@@ -150,7 +150,6 @@ public class Aplicacio implements Serializable {
         fileWriter.close();
     }
 
-    /* metode per crear factures *///TODO tots els metodes haurien de retornar un String informant de l'accio.
     public Factura crearFactura(int codiEmpleat, String identificadorClient, int producte, int quantitat, double preuUnitari,
             double descompte) throws AccioNoRealitzableException, ExcepcioPagadaException {
         //Cercam el client a qui li volem fer la factura i l'empleat que l'executa.
@@ -222,7 +221,6 @@ public class Aplicacio implements Serializable {
         }
     }
 
-    //NOUS EMPLEATS JA FUNCIONEN
     public void nouEmpleatVendes(String nomComplet, String identificador, String email, String telefon, String direccio, CategoriaEmpleat categoria, double salariBase, double comissio) throws AccioNoRealitzableException {
         EmpleatVendes empleat = new EmpleatVendes(nomComplet, identificador, email, telefon, direccio, categoria, salariBase, comissio);
         for (Empleat emp : empleatsVendes.values()) {
@@ -314,7 +312,6 @@ public class Aplicacio implements Serializable {
         particulars.put(client.getIdentificador(), client);
     }
 
-    //llista 3 majors amb ordenacio
     public ArrayList<Client> llistarMajorFacturacio() {
         ArrayList<Client> llistaFinal = new ArrayList<>();
         ArrayList<Empresa> llistaEmpreses = getEmpreses();
@@ -373,11 +370,8 @@ public class Aplicacio implements Serializable {
     }
 
     public void cobramentDeFactures() throws ExcepcioPagadaException {
-        LocalDate data = LocalDate.parse("2017-06-30");
-        System.out.println(data);
-        System.out.println(data.getDayOfWeek().getValue());
-        System.out.println(data.getDayOfMonth());
-        System.out.println(data.getDayOfYear());
+        //En acabar les proves aquesta data ha de ser l'actual ( .now() )
+        LocalDate data = LocalDate.parse("2017-06-29");
         if (data.getDayOfWeek().getValue() == 6) {
             //cobram emprese semanals
             System.out.println("Cobrament de semanals");
@@ -391,7 +385,7 @@ public class Aplicacio implements Serializable {
                 }
             }
         }
-        if (data.getDayOfMonth() == 30 | data.getDayOfMonth() == 31) {
+        if (data.getDayOfMonth() == 30) {
             //cobram mensuals
             System.out.println("mensuals");
             for (Empresa empresa : empreses.values()) {

@@ -100,7 +100,7 @@ public class Proves {
             f8.setData("2017-06-04");
             Factura f9 = app.crearFactura(4, "EMP5", 1, 2, 123.8, 10);
             //EMP5 trimestral
-            f9.setData("2017-09-20");
+            f9.setData("2017-06-20");
             app.crearFactura(5, "PAR2", 1, 24, 32.5, 10);
             app.crearFactura(6, "PAR3", 1, 40, 432.5, 10);
             app.crearFactura(7, "PAR1", 1, 2, 2.6, 10);
