@@ -369,10 +369,10 @@ public class Aplicacio implements Serializable {
         }
     }
 
-    public void cobramentDeFactures() {
+    public void cobramentDeFactures() throws ExcepcioPagadaException {
         LocalDate data = LocalDate.parse("2017-06-30");
         System.out.println(data);
-        System.out.println(data.getDayOfWeek());
+        System.out.println(data.getDayOfWeek().getValue());
         System.out.println(data.getDayOfMonth());
         System.out.println(data.getDayOfYear());
         if (data.getDayOfWeek().equals("SATURDAY")) {
@@ -380,19 +380,36 @@ public class Aplicacio implements Serializable {
             System.out.println("Cobrament de semanals");
             for (Empresa empresa : empreses.values()) {
                 for (Factura factura : empresa.getFactures()) {
-//                        if (factura.getData().getDayOfWeek() < "SATURDAY") {
-//                            
-//                        }
+                    if (factura.getData().getDayOfWeek().getValue() < 5) {
+                        factura.setPagada(true);
+                    }
                 }
             }
         }
         if (data.getDayOfMonth() == 30 | data.getDayOfMonth() == 31) {
             //cobram mensuals
             System.out.println("mensuals");
+            for (Empresa empresa : empreses.values()) {
+                for (Factura factura : empresa.getFactures()) {
+                    if (factura.getData().getMonthValue() < 31) {
+                        factura.setPagada(true);
+                    }
+                }
+            }
         }
-        if (data.getDayOfYear() % 91 == 0) {
+        if (data.getDayOfYear() % 90 == 0) {
             //cobram trimestrals
             System.out.println("trimestrals");
+            int primerMes = data.minusMonths(2).getMonthValue();
+            int segonMesMes = data.minusMonths(1).getMonthValue();
+            int tercerMes = data.getMonthValue();
+            for (Empresa empresa : empreses.values()) {
+                for (Factura factura : empresa.getFactures()) {
+                    if ((factura.getData().getMonthValue() == primerMes) | (factura.getData().getMonthValue() == segonMesMes) | (factura.getData().getMonthValue() == tercerMes)) {
+                        factura.setPagada(true);
+                    }
+                }
+            }
         }
 
     }
